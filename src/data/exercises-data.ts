@@ -1,6 +1,9 @@
-import { type Exercise, MuscleGroup, Gender } from "@/types/exercise"
+
 
 // Ces données pourront être remplacées par des appels à Prisma
+import {Exercise, MuscleGroup} from "@/types/types";
+import {Gender} from "@prisma/client";
+
 export const exercisesData: Exercise[] = [
   {
     id: "squat",

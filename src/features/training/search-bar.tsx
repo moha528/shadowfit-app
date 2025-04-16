@@ -3,7 +3,8 @@
 import { Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import type { MuscleGroup } from "@/types/exercise"
+import {MuscleGroup} from "@/types/types";
+
 
 interface SearchBarProps {
   searchQuery: string

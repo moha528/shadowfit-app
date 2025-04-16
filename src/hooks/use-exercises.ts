@@ -1,8 +1,9 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { type Exercise, MuscleGroup, Gender } from "@/types/exercise"
 import { exercisesData } from "@/data/exercises-data"
+import {Gender} from "@prisma/client";
+import {Exercise, MuscleGroup} from "@/types/types";
 
 export function useExercises() {
   const [exercises, setExercises] = useState<Exercise[]>(exercisesData)

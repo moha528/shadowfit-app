@@ -4,7 +4,9 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Info, Clock, Target, Award } from "lucide-react"
-import type { Exercise, Gender, MuscleGroup } from "@/types/exercise"
+import {Exercise, MuscleGroup} from "@/types/types";
+import {Gender} from "@prisma/client";
+
 
 interface ExerciseDetailsProps {
   exercise: Exercise

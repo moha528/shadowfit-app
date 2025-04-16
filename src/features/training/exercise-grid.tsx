@@ -3,8 +3,10 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { Dumbbell } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { ExerciseCard } from "@/components/exercise-card"
-import type { Exercise, Gender, MuscleGroup } from "@/types/exercise"
+import {Exercise, MuscleGroup} from "@/types/types";
+import {Gender} from "@prisma/client";
+import {ExerciseCard} from "@/features/training/exercise-card";
+
 
 interface ExerciseGridProps {
   exercises: Exercise[]
@@ -74,7 +76,7 @@ export function ExerciseGrid({
             Aucun exercice trouvé
           </h3>
           <p className="text-zinc-400 max-w-md mb-8">
-            Essayez de modifier vos critères de recherche ou sélectionnez une autre catégorie d'exercices.
+            Essayez de modifier vos critères de recherche ou sélectionnez une autre catégorie d&apos;exercices.
           </p>
           <Button
             variant="outline"

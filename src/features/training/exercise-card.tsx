@@ -3,7 +3,9 @@
 import { motion } from "framer-motion"
 import { ChevronRight } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
-import type { Exercise, Gender, MuscleGroup } from "@/types/exercise"
+import {Exercise, MuscleGroup} from "@/types/types";
+import {Gender} from "@prisma/client";
+
 
 interface ExerciseCardProps {
   exercise: Exercise
