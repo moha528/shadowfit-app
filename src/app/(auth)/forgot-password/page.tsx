@@ -13,7 +13,7 @@ import {verifyEmailAction} from "@/actions/auth.action";
 
 // Schéma Zod pour le formulaire de réinitialisation de mot de passe
 const forgotPasswordSchema = z.object({
-  email: z.string().email({ message: "Adresse email invalide" }),
+  email: z.string().email({ message: "Invalid email address" }),
 })
 
 // Type déduit du schéma
@@ -25,23 +25,23 @@ export default function ForgotPasswordPage() {
 
   const motivationalQuotes = [
     {
-      text: "La discipline est le pont entre les objectifs et les accomplissements.",
+      text: "Discipline is the bridge between goals and accomplishment.",
       author: "Jim Rohn",
     },
     {
-      text: "Le succès n'est pas final, l'échec n'est pas fatal. C'est le courage de continuer qui compte.",
+      text: "Success is not final, failure is not fatal: it is the courage to continue that counts.",
       author: "Winston Churchill",
     },
     {
-      text: "La douleur que vous ressentez aujourd'hui sera la force que vous ressentirez demain.",
+      text: "The pain you feel today will be the strength you feel tomorrow.",
       author: "Arnold Schwarzenegger",
     },
     {
-      text: "Le corps atteint ce que l'esprit croit.",
+      text: "The body achieves what the mind believes.",
       author: "Napoleon Hill",
     },
     {
-      text: "Ne comptez pas les jours, faites que les jours comptent.",
+      text: "Don't count the days, make the days count.",
       author: "Muhammad Ali",
     },
   ]
@@ -58,7 +58,7 @@ export default function ForgotPasswordPage() {
       type: "email",
       name: "email",
       label: "Email",
-      placeholder: "exemple@email.com",
+      placeholder: "example@email.com",
       required: true,
     },
   ]
@@ -70,7 +70,7 @@ export default function ForgotPasswordPage() {
     if (result.error) {
 
       toastAlert.error({
-        title: "Erreur",
+        title: "Error",
         description: result.error,
         duration: 3000,
       })
@@ -79,8 +79,8 @@ export default function ForgotPasswordPage() {
 
     }
     const loadingToastId =     toastAlert.loading({
-      title: "Envoi de l'email...",
-      description: "Nous vous enverrons un email pour réinitialiser votre mot de passe.",
+      title: "Sending email...",
+      description: "We will send you an email to reset your password.",
       duration: Infinity,
     })
 
@@ -95,16 +95,16 @@ export default function ForgotPasswordPage() {
       onSuccess: () => {
         toast.dismiss(loadingToastId)
         toastAlert.success({
-          title: "Email envoyé",
-          description: "Un email de réinitialisation a été envoyé à votre adresse.",
+          title: "Email sent",
+          description: "A reset email has been sent to your address.",
           duration: 5000,
         })
       },
       onError: (ctx) => {
         toast.dismiss(loadingToastId)
         toastAlert.error({
-          title: "Erreur",
-          description: ctx.error.message || "Une erreur est survenue lors de l'envoi de l'email.",
+          title: "Error",
+          description: ctx.error.message || "An error occurred while sending the email.",
           duration: 3000,
         })
       },
@@ -132,20 +132,20 @@ export default function ForgotPasswordPage() {
               </span>
               </div>
               <h1 className="text-3xl font-bold mb-2">
-                Mot de passe oublié ?
+                Forgot your password?
               </h1>
               <p className="text-zinc-400 text-center">
-                Entrez votre email pour recevoir un lien de réinitialisation
+                Enter your email to receive a reset link
               </p>
             </div>
                 <AuthForm
                     schema={forgotPasswordSchema}
                     fields={forgotPasswordFields}
-                    submitButtonText="Envoyer les instructions"
+                    submitButtonText="Send instructions"
                     isLoading={isLoading}
                     onSubmit={handleSubmit}
-                    footerText="Retour à la connexion"
-                    footerLinkText="Se connecter"
+                    footerText="Back to login"
+                    footerLinkText="Login"
                     footerLinkHref="/login"
                     socialButtons={false}
                 />

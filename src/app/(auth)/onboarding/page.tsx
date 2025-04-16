@@ -40,13 +40,11 @@ export default function OnboardingPage() {
     const handleComplete = async () => {
         const result = await completeProfileAction(gender)
         if (result.error) {
-
             toastAlert.error({
                 title: "Error",
                 description: result.error,
                 duration: 2000,
             });
-
             return
         }
         router.push("/dashboard")

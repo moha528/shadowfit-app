@@ -15,8 +15,8 @@ import {verifiedEmailAction} from "@/actions/auth.action";
 // Schéma Zod pour la validation OTP
 const verifyEmailSchema = z.object({
     otp: z.string()
-        .length(6, { message: "Le code doit contenir exactement 6 caractères" })
-        .regex(/^[0-9]+$/, { message: "Le code ne doit contenir que des chiffres" })
+        .length(6, { message: "The code must contain exactly 6 characters" })
+        .regex(/^[0-9]+$/, { message: "The code must contain only numbers" })
 })
 
 type VerifyEmailFormValues = z.infer<typeof verifyEmailSchema>
@@ -30,20 +30,20 @@ export default function VerifyEmailPage() {
 
     const motivationalQuotes = [
         {
-            text: "La persévérance transforme l'échec en accomplissement extraordinaire.",
-            author: "Inconnu",
+            text: "Perseverance transforms failure into extraordinary achievement.",
+            author: "Unknown",
         },
         {
-            text: "Chaque vérification est une étape vers une sécurité renforcée.",
-            author: "Inconnu",
+            text: "Every verification is a step towards enhanced security.",
+            author: "Unknown",
         },
         {
-            text: "La discipline est la clé de voûte de toute réussite durable.",
+            text: "Discipline is the cornerstone of all lasting success.",
             author: "Jim Rohn",
         },
         {
-            text: "Votre engagement aujourd'hui construit votre réussite de demain.",
-            author: "Inconnu",
+            text: "Your commitment today builds your success tomorrow.",
+            author: "Unknown",
         },
     ]
 
@@ -57,7 +57,7 @@ export default function VerifyEmailPage() {
         {
             type: "otp",
             name: "otp",
-            label: "Code de vérification",
+            label: "Verification Code",
             placeholder: "123456",
             required: true,
         },
@@ -66,8 +66,8 @@ export default function VerifyEmailPage() {
     const handleSubmit = async (values: VerifyEmailFormValues) => {
         if (!email) {
             toastAlert.error({
-                title: "Email manquant",
-                description: "Veuillez utiliser le lien complet reçu par email.",
+                title: "Missing email",
+                description: "Please use the complete link received by email.",
                 duration: 5000,
             })
             return
@@ -75,8 +75,8 @@ export default function VerifyEmailPage() {
 
         setIsLoading(true)
         const loadingToastId = toastAlert.loading({
-            title: "Vérification en cours...",
-            description: "Nous validons votre code de sécurité.",
+            title: "Verifying...",
+            description: "We are validating your security code.",
             duration: Infinity,
         })
 
@@ -90,8 +90,8 @@ export default function VerifyEmailPage() {
                 onSuccess: async () => {
                     toast.dismiss(loadingToastId)
                     toastAlert.success({
-                        title: "Email vérifié",
-                        description: "Votre adresse email a été confirmée avec succès.",
+                        title: "Email verified",
+                        description: "Your email address has been successfully confirmed.",
                         duration: 5000,
                     })
                     const result = await verifiedEmailAction(email)
@@ -100,8 +100,8 @@ export default function VerifyEmailPage() {
                     } else {
                         toast.dismiss(loadingToastId)
                         toastAlert.error({
-                            title: "Erreur de vérification",
-                            description: result.error || "Une erreur s'est produite lors de la vérification de votre adresse email.",
+                            title: "Verification error",
+                            description: result.error || "An error occurred while verifying your email address.",
                             duration: 5000,
                         })
                     }
@@ -110,8 +110,8 @@ export default function VerifyEmailPage() {
                 onError: (ctx) => {
                     toast.dismiss(loadingToastId)
                     toastAlert.error({
-                        title: "Erreur de vérification",
-                        description: ctx.error.message || "Le code est invalide ou a expiré. Veuillez réessayer.",
+                        title: "Verification error",
+                        description: ctx.error.message || "The code is invalid or has expired. Please try again.",
                         duration: 5000,
                     })
                 },
@@ -124,8 +124,8 @@ export default function VerifyEmailPage() {
     const handleResendOtp = async () => {
         if (!email) return
        const loadingToastId = toastAlert.loading({
-            title: "Envoi du code...",
-            description: "Un nouveau code de vérification est en cours d'envoi.",
+            title: "Sending code...",
+            description: "A new verification code is being sent.",
             duration: Infinity,
         })
 
@@ -141,8 +141,8 @@ export default function VerifyEmailPage() {
                 onSuccess: () => {
                     toast.dismiss(loadingToastId)
                     toastAlert.success({
-                        title: "Code envoyé",
-                        description: "Un nouveau code a été envoyé à votre adresse email.",
+                        title: "Code sent",
+                        description: "A new code has been sent to your email address.",
                         duration: 5000,
                     })
                   redirect("/verify-email?email=" + email + "&type=email-verification" + "&message=Un email de vérification a été envoyé à votre adresse. Veuillez vérifier votre boîte de réception." + "&error=" + "Un nouveau code a été envoyé à votre adresse email." + "&success=" + "Un nouveau code a été envoyé à votre adresse email." + "&info=" + "Un nouveau code a été envoyé à votre adresse email." + "&warning=" + "Un nouveau code a été envoyé à votre adresse email." + "&alert=" + "Un nouveau code a été envoyé à votre adresse email." + "&notification=" + "Un nouveau code a été envoyé à votre adresse email." + "&toast=" + "Un nouveau code a été envoyé à votre adresse email.");
@@ -150,8 +150,8 @@ export default function VerifyEmailPage() {
                 onError: (ctx) => {
                     toast.dismiss(loadingToastId)
                     toastAlert.error({
-                        title: "Erreur d'envoi",
-                        description: ctx.error.message || "Une erreur est survenue lors de l'envoi du code.",
+                        title: "Sending error",
+                        description: ctx.error.message || "An error occurred while sending the code.",
                         duration: 5000,
                     })
                 },
@@ -181,12 +181,12 @@ export default function VerifyEmailPage() {
               </span>
                         </div>
                         <h1 className="text-3xl font-bold mb-2">
-                            {isVerified ? "Email vérifié !" : "Vérification d'email"}
+                            {isVerified ? "Email verified!" : "Email verification"}
                         </h1>
                         <p className="text-zinc-400 text-center">
                             {isVerified
-                                ? "Votre adresse email a été confirmée avec succès."
-                                : `Entrez le code à 6 chiffres envoyé à ${email || "votre email"}`}
+                                ? "Your email address has been successfully confirmed."
+                                : `Enter the 6-digit code sent to ${email || "your email"}`}
                         </p>
                     </div>
 
@@ -198,7 +198,7 @@ export default function VerifyEmailPage() {
                                 disabled={isLoading}
                                 className="text-sm text-gray-400 hover:text-gray-300 disabled:opacity-50 transition-colors duration-300"
                             >
-                                Vous n&apos;avez pas reçu de code ? <span className="underline">Renvoyer</span>
+                                Didn't receive a code? <span className="underline">Resend</span>
                             </button>
                         </div>
                     )}
@@ -206,11 +206,11 @@ export default function VerifyEmailPage() {
                     <AuthForm
                         schema={verifyEmailSchema}
                         fields={verifyEmailFields}
-                        submitButtonText={isVerified ? "Continuer vers l'application" : "Vérifier le code"}
+                        submitButtonText={isVerified ? "Continue to application" : "Verify code"}
                         isLoading={isLoading}
                         onSubmit={handleSubmit}
-                        footerText={isVerified ? "" : "Revenir à la page de connexion"}
-                        footerLinkText={isVerified ? "" : "Se connecter"}
+                        footerText={isVerified ? "" : "Back to login page"}
+                        footerLinkText={isVerified ? "" : "Sign in"}
                         footerLinkHref={isVerified ? "" : "/login"}
                     />
                 </div>

@@ -105,7 +105,7 @@ export function AuthForm<T extends ZodType<any, any, any>>({
                                     href="/forgot-password"
                                     className="text-sm text-gray-500 hover:text-gray-300 transition-colors duration-300"
                                 >
-                                    Mot de passe oublié ?
+                                    Forgot password?
                                 </Link>
                             </div>
                         )}
@@ -120,7 +120,7 @@ export function AuthForm<T extends ZodType<any, any, any>>({
                     {isLoading ? (
                         <>
                             <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                            Chargement...
+                            Loading...
                         </>
                     ) : (
                         <span className="flex items-center justify-center">
@@ -137,7 +137,7 @@ export function AuthForm<T extends ZodType<any, any, any>>({
                                 <div className="w-full border-t border-zinc-800"></div>
                             </div>
                             <div className="relative flex justify-center text-sm">
-                                <span className="px-4 bg-black text-zinc-400">Ou continuer avec</span>
+                                <span className="px-4 bg-black text-zinc-400">Or continue with</span>
                             </div>
                         </div>
 

@@ -15,8 +15,8 @@ import {redirect} from "next/navigation";
 
 // Schéma Zod pour le formulaire de connexion
 const loginSchema = z.object({
-  email: z.string().email({ message: "Adresse email invalide" }),
-  password: z.string().min(6, { message: "Le mot de passe doit contenir au moins 6 caractères" }),
+  email: z.string().email({ message: "Invalid email address" }),
+  password: z.string().min(6, { message: "Password must contain at least 6 characters" }),
 })
 
 // Type déduit du schéma
@@ -29,23 +29,23 @@ export default function LoginPage() {
 
   const motivationalQuotes = [
     {
-      text: "La discipline est le pont entre les objectifs et les accomplissements.",
+      text: "Discipline is the bridge between goals and accomplishment.",
       author: "Jim Rohn",
     },
     {
-      text: "Le succès n'est pas final, l'échec n'est pas fatal. C'est le courage de continuer qui compte.",
+      text: "Success is not final, failure is not fatal: it is the courage to continue that counts.",
       author: "Winston Churchill",
     },
     {
-      text: "La douleur que vous ressentez aujourd'hui sera la force que vous ressentirez demain.",
+      text: "The pain you feel today will be the strength you feel tomorrow.",
       author: "Arnold Schwarzenegger",
     },
     {
-      text: "Le corps atteint ce que l'esprit croit.",
+      text: "The body achieves what the mind believes.",
       author: "Napoleon Hill",
     },
     {
-      text: "Ne comptez pas les jours, faites que les jours comptent.",
+      text: "Don't count the days, make the days count.",
       author: "Muhammad Ali",
     },
   ]
@@ -62,13 +62,13 @@ export default function LoginPage() {
       type: "email",
       name: "email",
       label: "Email",
-      placeholder: "exemple@email.com",
+      placeholder: "example@email.com",
       required: true,
     },
     {
       type: "password",
       name: "password",
-      label: "Mot de passe",
+      label: "Password",
       placeholder: "••••••••",
       required: true,
     },
@@ -81,7 +81,7 @@ export default function LoginPage() {
     })
 
     // Redirect to the email verification page or show a success message
-    redirect("/verify-email?email=" + email + "&type=email-verification" + "&message=Un email de vérification a été envoyé à votre adresse. Veuillez vérifier votre boîte de réception." + "&error=" + error?.message || "")
+    redirect("/verify-email?email=" + email + "&type=email-verification" + "&message=A verification email has been sent to your address. Please check your inbox." + "&error=" + error?.message || "")
   }
   const handleSubmit = async (values: LoginFormValues) => {
     setIsLoading(true);
@@ -89,15 +89,15 @@ export default function LoginPage() {
 
     // Affiche le toast de chargement
     const loadingToastId = toastAlert.loading({
-      title: "Connexion en cours...",
-      description: "Veuillez patienter pendant que nous vérifions vos identifiants.",
+      title: "Logging in...",
+      description: "Please wait while we verify your credentials.",
       duration: Infinity,
     });
     const result = await verifyEmailAction(email)
     if (result.error) {
       toastAlert.error({
-        title: "Erreur de vérification",
-        description: "Une erreur s'est produite lors de la vérification de votre adresse email.",
+        title: "Verification error",
+        description: "An error occurred while verifying your email address.",
         duration: 5000,
       })
       verifyEmail(email)
@@ -119,8 +119,8 @@ export default function LoginPage() {
         toast.dismiss(loadingToastId);
 
           toastAlert.success({
-            title: "Connexion réussie",
-            description: "Vous êtes maintenant connecté à votre compte.",
+            title: "Login successful",
+            description: "You are now logged into your account.",
             duration: 4000,
           });
           redirect("/dashboard");
@@ -132,15 +132,15 @@ export default function LoginPage() {
 
         if(ctx.error.message === "Invalid email or password") {
           toastAlert.error({
-            title: "Erreur de connexion",
-            description: "Adresse email ou mot de passe incorrect.",
+            title: "Login error",
+            description: "Incorrect email or password.",
             duration: 3000,
           });
         } else {
           toast.dismiss(loadingToastId)
           toastAlert.error({
-            title: "Erreur de connexion",
-            description: "Une erreur est survenue lors de la connexion. Veuillez réessayer.",
+            title: "Login error",
+            description: "An error occurred during login. Please try again.",
             duration: 3000,
           });
         }
@@ -170,21 +170,21 @@ export default function LoginPage() {
               </span>
               </div>
               <h1 className="text-3xl font-bold mb-2">
-                Connexion à votre compte
+                Login to your account
               </h1>
               <p className="text-zinc-400 text-center">
-                Entrez vos identifiants pour accéder à votre espace personnel
+                Enter your credentials to access your personal space
               </p>
             </div>
 
             <AuthForm
                 schema={loginSchema}
                 fields={loginFields}
-                submitButtonText="Se connecter"
+                submitButtonText="Login"
                 isLoading={isLoading}
                 onSubmit={handleSubmit}
-                footerText="Vous n'avez pas de compte ?"
-                footerLinkText="Créer un compte"
+                footerText="Don't have an account?"
+                footerLinkText="Create an account"
                 footerLinkHref="/register"
                 socialButtons={true}
                 forgotPasswordLink={true}

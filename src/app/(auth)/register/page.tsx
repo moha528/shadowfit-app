@@ -13,9 +13,9 @@ import {redirect} from "next/navigation";
 
 // Schéma Zod pour le formulaire d'inscription
 const registerSchema = z.object({
-  fullName: z.string().min(2, { message: "Le nom doit contenir au moins 2 caractères" }),
-  email: z.string().email({ message: "Adresse email invalide" }),
-  password: z.string().min(6, { message: "Le mot de passe doit contenir au moins 6 caractères" }),
+  fullName: z.string().min(2, { message: "Name must contain at least 2 characters" }),
+  email: z.string().email({ message: "Invalid email address" }),
+  password: z.string().min(6, { message: "Password must contain at least 6 characters" }),
 })
 
 // Type inféré à partir du schéma Zod
@@ -28,23 +28,23 @@ export default function RegisterPage() {
 
   const motivationalQuotes = [
     {
-      text: "Chaque nouveau début est l'occasion de faire quelque chose de grand.",
+      text: "Every new beginning is an opportunity to do something great.",
       author: "Robin Sharma",
     },
     {
-      text: "Le meilleur moment pour commencer est maintenant.",
+      text: "The best time to start is now.",
       author: "Unknown",
     },
     {
-      text: "L'effort d'aujourd'hui est la force de demain.",
+      text: "Today's effort is tomorrow's strength.",
       author: "Unknown",
     },
     {
-      text: "Ta seule limite est celle que tu t'imposes.",
+      text: "Your only limit is the one you set for yourself.",
       author: "Unknown",
     },
     {
-      text: "La progression n'est pas linéaire, mais ta détermination devrait l'être.",
+      text: "Progress isn't linear, but your determination should be.",
       author: "Unknown",
     },
   ]
@@ -60,21 +60,21 @@ export default function RegisterPage() {
     {
       type: "text",
       name: "fullName",
-      label: "Nom complet",
-      placeholder: "Jean Dupont",
+      label: "Full Name",
+      placeholder: "John Doe",
       required: true,
     },
     {
       type: "email",
       name: "email",
       label: "Email",
-      placeholder: "exemple@email.com",
+      placeholder: "example@email.com",
       required: true,
     },
     {
       type: "password",
       name: "password",
-      label: "Mot de passe",
+      label: "Password",
       placeholder: "••••••••",
       required: true,
     },
@@ -92,8 +92,8 @@ export default function RegisterPage() {
   const handleSubmit = async (values: RegisterFormValues) => {
     setIsLoading(true)
     const loadingToastId =     toastAlert.loading({
-      title: "Inscription en cours...",
-      description: "Veuillez patienter pendant que nous traitons votre inscription.",
+      title: "Signing up...",
+      description: "Please wait while we process your registration.",
       duration: Infinity,
     })
     const { email, password, fullName } = values;
@@ -109,8 +109,8 @@ export default function RegisterPage() {
       onSuccess: () => {
         toast.dismiss(loadingToastId);
         toastAlert.success({
-            title: "Inscription réussie",
-            description: "Votre compte a été créé avec succès !",
+            title: "Registration successful",
+            description: "Your account has been created successfully!",
             duration: 3000,
         });
         //handleClick();
@@ -119,8 +119,8 @@ export default function RegisterPage() {
       onError: (ctx) => {
         if (ctx.error.message === "Email already exists") {
           toastAlert.error({
-            title: "Erreur d'inscription",
-            description: "Cet email est déjà utilisé.",
+            title: "Registration error",
+            description: "This email is already in use.",
             duration: 3000,
           });
 
@@ -154,21 +154,21 @@ export default function RegisterPage() {
               </span>
               </div>
               <h1 className="text-3xl font-bold mb-2">
-                Créer un compte
+                Create an account
               </h1>
               <p className="text-zinc-400 text-center">
-                Rejoignez notre communauté et commencez votre parcours fitness
+                Join our community and start your fitness journey
               </p>
             </div>
 
             <AuthForm
                 schema={registerSchema}
                 fields={registerFields}
-                submitButtonText="S'inscrire"
+                submitButtonText="Sign up"
                 isLoading={isLoading}
                 onSubmit={handleSubmit}
-                footerText="Vous avez déjà un compte ?"
-                footerLinkText="Se connecter"
+                footerText="Already have an account?"
+                footerLinkText="Sign in"
                 footerLinkHref="/login"
                 socialButtons={true}
                 forgotPasswordLink={false}

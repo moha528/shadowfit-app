@@ -2,18 +2,16 @@
 
 import { usePathname } from "next/navigation"
 import { SubNav } from "./sub-nav"
+import { navigationConfig } from "@/lib/nav-config"
 
 export function ContextNav() {
   const pathname = usePathname()
 
   // Déterminer la section active
-  let section = "/dashboard"
-  if (pathname.startsWith("/workouts")) section = "/workouts"
-  else if (pathname.startsWith("/progress")) section = "/progress"
-  else if (pathname.startsWith("/calendar")) section = "/calendar"
-  else if (pathname.startsWith("/profile")) section = "/profile"
-  else if (pathname.startsWith("/settings")) section = "/settings"
-  else if (pathname.startsWith("/notifications")) section = "/notifications"
+  let section = navigationConfig[0].href
+  for (let item of navigationConfig)
+    if (pathname.startsWith(item.href))
+      section = item.href
 
   return <SubNav section={section} />
 }

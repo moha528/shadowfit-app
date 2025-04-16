@@ -14,14 +14,14 @@ import { toast } from "sonner"
 // Schéma Zod pour la réinitialisation de mot de passe
 const resetPasswordSchema = z.object({
     password: z.string()
-        .min(8, { message: "Le mot de passe doit contenir au moins 8 caractères" })
-        .regex(/[A-Z]/, { message: "Doit contenir au moins une majuscule" })
-        .regex(/[a-z]/, { message: "Doit contenir au moins une minuscule" })
-        .regex(/[0-9]/, { message: "Doit contenir au moins un chiffre" })
-        .regex(/[^A-Za-z0-9]/, { message: "Doit contenir au moins un caractère spécial" }),
+        .min(8, { message: "Password must contain at least 8 characters" })
+        .regex(/[A-Z]/, { message: "Must contain at least one uppercase letter" })
+        .regex(/[a-z]/, { message: "Must contain at least one lowercase letter" })
+        .regex(/[0-9]/, { message: "Must contain at least one number" })
+        .regex(/[^A-Za-z0-9]/, { message: "Must contain at least one special character" }),
     confirmPassword: z.string()
 }).refine(data => data.password === data.confirmPassword, {
-    message: "Les mots de passe ne correspondent pas",
+    message: "Passwords do not match",
     path: ["confirmPassword"]
 })
 
@@ -36,19 +36,19 @@ export default function ResetPasswordPage() {
 
     const motivationalQuotes = [
         {
-            text: "La discipline est le pont entre les objectifs et les accomplissements.",
+            text: "Discipline is the bridge between goals and accomplishment.",
             author: "Jim Rohn",
         },
         {
-            text: "Le succès n'est pas final, l'échec n'est pas fatal. C'est le courage de continuer qui compte.",
+            text: "Success is not final, failure is not fatal. It is the courage to continue that counts.",
             author: "Winston Churchill",
         },
         {
-            text: "Chaque nouveau jour est une nouvelle opportunité de recommencer.",
-            author: "Inconnu",
+            text: "Each new day is a new opportunity to start again.",
+            author: "Unknown",
         },
         {
-            text: "La persévérance est le secret de tous les triomphes.",
+            text: "Perseverance is the secret of all triumphs.",
             author: "Victor Hugo",
         },
     ]
@@ -63,14 +63,14 @@ export default function ResetPasswordPage() {
         {
             type: "password",
             name: "password",
-            label: "Nouveau mot de passe",
+            label: "New Password",
             placeholder: "••••••••",
             required: true,
         },
         {
             type: "password",
             name: "confirmPassword",
-            label: "Confirmer le mot de passe",
+            label: "Confirm Password",
             placeholder: "••••••••",
             required: true,
         },
@@ -79,8 +79,8 @@ export default function ResetPasswordPage() {
     const handleSubmit = async (values: ResetPasswordFormValues) => {
         if (!token) {
             toastAlert.error({
-                title: "Token manquant",
-                description: "Le lien de réinitialisation est invalide ou expiré.",
+                title: "Missing token",
+                description: "The reset link is invalid or has expired.",
                 duration: 5000,
             })
             return
@@ -88,8 +88,8 @@ export default function ResetPasswordPage() {
 
         setIsLoading(true)
         const loadingToastId = toastAlert.loading({
-            title: "Réinitialisation en cours...",
-            description: "Veuillez patienter pendant que nous mettons à jour votre mot de passe.",
+            title: "Resetting password...",
+            description: "Please wait while we update your password.",
             duration: Infinity,
         })
         setIsLoading(true);
@@ -106,8 +106,8 @@ export default function ResetPasswordPage() {
             onSuccess: () => {
                 toast.dismiss(loadingToastId)
               toastAlert.success({
-                title: "Mot de passe réinitialisé",
-                description: "Votre mot de passe a été réinitialisé avec succès.",
+                title: "Password reset",
+                description: "Your password has been successfully reset.",
                 duration: 5000,
               })
             redirect("/login" + "?resetPassword=true" + "&email=" + searchParams.get("email") || "")
@@ -115,8 +115,8 @@ export default function ResetPasswordPage() {
             onError: (ctx) => {
                 toast.dismiss(loadingToastId)
                 toastAlert.error({
-                    title: "Erreur",
-                    description: ctx.error.message || "Une erreur est survenue lors de la réinitialisation du mot de passe.",
+                    title: "Error",
+                    description: ctx.error.message || "An error occurred while resetting your password.",
                     duration: 3000,
                 })
             },
@@ -146,23 +146,23 @@ export default function ResetPasswordPage() {
               </span>
                         </div>
                         <h1 className="text-3xl font-bold mb-2">
-                            {isSuccess ? "Mot de passe mis à jour" : "Réinitialiser votre mot de passe"}
+                            {isSuccess ? "Password updated" : "Reset your password"}
                         </h1>
                         <p className="text-zinc-400 text-center">
                             {isSuccess
-                                ? "Vous pouvez maintenant vous connecter avec votre nouveau mot de passe."
-                                : "Entrez votre nouveau mot de passe ci-dessous."}
+                                ? "You can now sign in with your new password."
+                                : "Enter your new password below."}
                         </p>
                     </div>
 
                     <AuthForm
                         schema={resetPasswordSchema}
                         fields={resetPasswordFields}
-                        submitButtonText={isSuccess ? "Aller à la page de connexion" : "Réinitialiser le mot de passe"}
+                        submitButtonText={isSuccess ? "Go to login page" : "Reset password"}
                         isLoading={isLoading}
                         onSubmit={handleSubmit}
-                        footerText={isSuccess ? "" : "Revenir à la page de connexion"}
-                        footerLinkText={isSuccess ? "" : "Se connecter"}
+                        footerText={isSuccess ? "" : "Back to login page"}
+                        footerLinkText={isSuccess ? "" : "Sign in"}
                         footerLinkHref={isSuccess ? "" : "/login"}
                     />
                 </div>

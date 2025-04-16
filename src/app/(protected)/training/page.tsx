@@ -3,9 +3,8 @@ import React from 'react';
 
 const HomePage = () => {
     return (
-        <div>
-            <h1>Bienvenue sur la page d'accueil</h1>
-            <p>Training</p>
+        <div className="container mx-auto py-10">
+            <h1 className="text-3xl font-bold">Training</h1>
         </div>
     );
 };

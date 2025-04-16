@@ -68,7 +68,7 @@ export default async function middleware(request: NextRequest) {
 
             // Vérification des permissions
             if (user?.role) {
-                const navItems = navigationConfig();
+                const navItems = navigationConfig;
                 const pathSegments = pathname.split('/').filter(Boolean);
                 const currentPathPattern = pathSegments.map(segment => {
                     return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(segment)
@@ -81,7 +81,7 @@ export default async function middleware(request: NextRequest) {
                     // ... (logique de matching existante)
                 });
 
-                if (matchingRoute && !matchingRoute.roles.includes(user.role as Role)) {
+                if (matchingRoute && !matchingRoute.roles.includes(user.role.toString() as Role)) {
                     return NextResponse.redirect(new URL('/not-found', request.url));
                 }
             }

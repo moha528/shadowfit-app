@@ -16,6 +16,7 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { LogoutButton } from "@/features/auth/logout-button"
 import { authClient } from "@/lib/authClient"
+import { navigationConfig } from "@/lib/nav-config"
 
 export function MainNav() {
   const pathname = usePathname()
@@ -51,7 +52,7 @@ export function MainNav() {
         </div>
 
         <nav className="hidden md:flex items-center space-x-1 flex-1">
-          {routes.map((route) => (
+          {navigationConfig.map((route) => (
             <Link
               key={route.href}
               href={route.href}
@@ -59,7 +60,7 @@ export function MainNav() {
                 pathname === route.href ? "text-white bg-zinc-800" : "text-zinc-400 hover:bg-zinc-900"
               }`}
             >
-              {route.label}
+              {route.title}
             </Link>
           ))}
         </nav>
