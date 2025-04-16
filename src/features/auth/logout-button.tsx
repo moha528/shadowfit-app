@@ -30,7 +30,7 @@ export function LogoutButton({ className }: LogoutButtonProps) {
       disabled={isLoading}
     >
       <LogOut className="h-5 w-5 mr-2" />
-      {isLoading ? <Loader2 className="h-5 w-5 mr-2 animate-spin" /> : <span>Déconnexion</span>}
+      {isLoading ? <Loader2 className="h-5 w-5 mr-2 animate-spin" /> : <span>Logout</span>}
     </Button>
   )
 }

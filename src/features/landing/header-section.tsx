@@ -123,7 +123,7 @@ export const HeaderSection = () => {
                                     asChild
                                     size="sm"
                                     className={cn(isScrolled ? 'lg:inline-flex' : 'hidden',"bg-primary hover:bg-primary")}>
-                                    <Link href="#">
+                                    <Link href="/login">
                                         <span>Get Started</span>
                                     </Link>
                                 </Button>
