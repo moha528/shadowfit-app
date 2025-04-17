@@ -15,15 +15,15 @@ import { toast } from "sonner"
 
 // Types
 import { Exercise } from "../../../types/types"
-import {HeaderLogo} from "@/features/training/header-logo";
-import {FilterBar} from "@/features/training/filter-bar";
-import {NoResultsFound} from "@/features/training/no-results-found";
-import {ExerciseListCard} from "@/features/training/exerice-list-card";
-import {DeleteConfirmationModal} from "@/features/training/delete-confirmation-modal";
-import {EditExerciseModal} from "@/features/training/edit-exercise-modal";
+import {HeaderLogo} from "@/features/training/training/header-logo";
+import {FilterBar} from "@/features/training/training/filter-bar";
+import {NoResultsFound} from "@/features/training/training/no-results-found";
+import {ExerciseListCard} from "@/features/training/training/exerice-list-card";
+import {DeleteConfirmationModal} from "@/features/training/exercise/delete-confirmation-modal";
+import {EditExerciseModal} from "@/features/training/training/edit-exercise-modal";
 import {ExerciseFormValues} from "@/features/training/field-schema-form";
 
-export default function ExerciseList({data}: {data: Exercise[]}) {
+export default function TrainingComponent({data}: {data: Exercise[]}) {
     const [isLoading, setIsLoading] = useState(false)
     const [isEditModalOpen, setIsEditModalOpen] = useState(false)
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
