@@ -1,4 +1,4 @@
-import { Home, User, Calendar, Users, Activity, UserPlus } from "lucide-react";
+import { Home, User, Users, Activity, UserPlus, Calendar } from "lucide-react";
 import { Role } from "@prisma/client";
 
 interface NavItem {
@@ -37,16 +37,9 @@ export const navigationConfig: NavItem[] = [
         roles: [Role.USER, Role.ADMIN],
         subNav: [
             {
-                id: "my-training",
-                title: "My Training",
-                href: "/training",
-                icon: <Activity className="w-5 h-5" />,
-                roles: [Role.USER, Role.ADMIN]
-            },
-            {
                 id: "exercises",
                 title: "Exercises",
-                href: "/training/exercises",
+                href: "/training",
                 icon: <Activity className="w-5 h-5" />,
                 roles: [Role.USER, Role.ADMIN]
             },
@@ -60,42 +53,19 @@ export const navigationConfig: NavItem[] = [
         ]
     },
     {
-        id: "account",
-        title: "Account",
-        href: "/account",
+        id: "space",
+        title: "My Space",
+        href: "/space",
         icon: <User className="w-5 h-5" />,
         roles: [Role.USER, Role.ADMIN],
         subNav: [
             {
                 id: "my-infos",
-                title: "My Infos",
-                href: "/account",
+                title: "My Space",
+                href: "/space",
                 icon: <User className="w-5 h-5" />,
                 roles: [Role.USER, Role.ADMIN]
             },
-            {
-                id: "change-password", 
-                title: "Change Password",
-                href: "/account/change-password",
-                icon: <User className="w-5 h-5" />,
-                roles: [Role.USER, Role.ADMIN]
-            }
-        ]
-    },
-    {
-        id: "calendar",
-        title: "Calendar",
-        href: "/calendar",
-        icon: <Calendar className="w-5 h-5" />,
-        roles: [Role.USER, Role.ADMIN],
-        subNav: [
-            {
-                id: "calendar",
-                title: "Calendar",
-                href: "/calendar",
-                icon: <Calendar className="w-5 h-5" />,
-                roles: [Role.USER, Role.ADMIN]
-            }
         ]
     },
     {
