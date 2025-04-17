@@ -37,6 +37,7 @@ enum Role {
 enum Gender {
   MALE
   FEMALE
+  BOTH
 }
 
 model User {
@@ -90,7 +91,8 @@ model Exercise {
   description  String?
   muscleGroups MuscleGroup[]
   intensity    Int               @default(1) // 1 = faible, 3 = intense
-  type         String // "matériel", "sans matériel"
+  type         Gender            @default(MALE)
+  image        String?
   sessions     TrainingSession[] @relation("SessionExercises")
 }
 

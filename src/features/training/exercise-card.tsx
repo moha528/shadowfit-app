@@ -3,13 +3,13 @@
 import { motion } from "framer-motion"
 import { ChevronRight } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
-import {Exercise, MuscleGroup} from "@/types/types";
-import {Gender} from "@prisma/client";
+import {Exercise} from "@/types/types";
+import { MuscleGroup} from "@prisma/client";
+import Particles from "@/components/ui/particles";
 
 
 interface ExerciseCardProps {
   exercise: Exercise
-  gender: Gender
   isHovered: boolean
   onHover: () => void
   onLeave: () => void
@@ -21,7 +21,6 @@ interface ExerciseCardProps {
 
 export function ExerciseCard({
   exercise,
-  gender,
   isHovered,
   onHover,
   onLeave,
@@ -57,10 +56,11 @@ export function ExerciseCard({
       <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-110">
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/60 z-10" />
         <img
-          src={exercise.image[gender] || "/placeholder.svg"}
+          src={exercise.image || "/placeholder.svg"}
           alt={exercise.name}
           className="w-full h-full object-cover object-center"
         />
+        <Particles/>
       </div>
 
       {/* Glow effect on hover */}
@@ -84,7 +84,7 @@ export function ExerciseCard({
         <div className="bg-black/60 backdrop-blur-md p-4 rounded-lg border border-zinc-800/50 transform transition-all duration-500 group-hover:translate-y-0 translate-y-2 opacity-90 group-hover:opacity-100 shadow-lg shadow-black/20">
           <p className="text-sm text-zinc-300 line-clamp-3">
             {exercise.description?.split(".")[0] ||
-              `Exercice ciblant principalement ${exercise.muscleGroups.map(getMuscleGroupLabel).join(", ")}.`}
+              `Exercice focus on ${exercise.muscleGroups.map(getMuscleGroupLabel).join(", ")}.`}
           </p>
           <div className="flex items-center justify-between mt-3">
             <div className="flex space-x-1">
@@ -107,7 +107,7 @@ export function ExerciseCard({
 
       {/* Muscle groups */}
       <div className="absolute top-4 right-4 z-20">
-        <Badge className="bg-black/50 backdrop-blur-sm border-zinc-800/30 text-xs shadow-md shadow-black/20">
+        <Badge className=" backdrop-blur-sm border-zinc-800/30 bg-zinc-900 text-muted-foreground text-xs shadow-md shadow-black/20">
           {exercise.muscleGroups.map(getMuscleGroupLabel).join(", ")}
         </Badge>
       </div>

@@ -38,7 +38,7 @@ export default function LoginPage() {
     },
     {
       text: "The pain you feel today will be the strength you feel tomorrow.",
-      author: "Arnold Schwarzenegger",
+      author: "Arnold Schwarzenegger"
     },
     {
       text: "The body achieves what the mind believes.",

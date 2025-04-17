@@ -24,10 +24,10 @@ export const AuthService = {
 
         const user = await UserRepository.getUserByEmail(email)
         if (!user) {
-           return { error: "Utilisateur non trouvé" }
+           return { error: "User not found" }
         }
         if (!user.emailVerified) {
-           return { error: "Email non vérifié" }
+           return { error: "Email nor verified" }
         }
     },
 
@@ -36,7 +36,7 @@ export const AuthService = {
         const session = await auth.api.getSession({ headers: headersValue })
 
         if (!session?.user ) {
-            return { error: "Utilisateur non authentifié" }
+            return { error: "Utilisateur not found" }
         }
 
 
