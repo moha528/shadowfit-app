@@ -1,10 +1,10 @@
 import { Card, CardContent } from "@/components/ui/card"
-import { UserType } from "./types"
+import { User } from "@prisma/client"
 import { Separator } from "@/components/ui/separator"
 import { Calendar } from "lucide-react"
 import { CheckCircle } from "lucide-react"
 
-const ProfileInfo = ({ user }: { user: UserType }) => {
+const ProfileInfo = ({ user }: { user: User }) => {
     return (
       <Card className="border-0 bg-background">
         <CardContent className="p-6 space-y-4">
@@ -28,7 +28,7 @@ const ProfileInfo = ({ user }: { user: UserType }) => {
             <h3 className="text-sm font-medium text-muted-foreground mb-1">Member since</h3>
             <div className="flex items-center">
               <Calendar className="h-4 w-4 mr-2 text-muted-foreground" />
-              <p>{user.createdAt.toLocaleDateString()}</p>
+              <p>{new Date(user.createdAt).toISOString().split('T')[0]}</p>
             </div>
           </div>
   

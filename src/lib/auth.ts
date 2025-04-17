@@ -29,7 +29,7 @@ export const auth = betterAuth({
                 from: 'Acme <onboarding@resend.dev>',
                 to: user.email,
                 subject: "Réinitialisation du mot de passe",
-                react: ResetPasswordEmailTemplate({firstName: user.name, resetLink: url}),
+                react: await ResetPasswordEmailTemplate({firstName: user.name, resetLink: url}),
             });
         }
 
@@ -65,7 +65,6 @@ export const auth = betterAuth({
                         text = `Votre code OTP pour réinitialiser votre mot de passe est : ${otp}`;
                     } else {
                         subject = "Code de sécurité";
-                        // eslint-disable-next-line @typescript-eslint/no-unused-vars
                         text = `Votre code de sécurité est : ${otp}`;
                     }
 
@@ -73,14 +72,11 @@ export const auth = betterAuth({
                         from: 'Acme <onboarding@resend.dev>',
                         to: email,
                         subject: subject,
-                        react: OtpEmailTemplate({firstName: email, otp: otp, type: type}),
-
+                        react: await OtpEmailTemplate({firstName: email, otp: otp, type: type}),
                     });
-
-                    return { success: true };
                 } catch (error) {
                     console.error("Erreur lors de l'envoi de l'OTP:", error);
-                    return { success: false, error: "Failed to send OTP" };
+                    throw new Error("Failed to send OTP");
                 }
             },
         })

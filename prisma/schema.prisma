@@ -107,7 +107,7 @@ model ProgramDay {
   id            String        @id @default(cuid())
   dayOfWeek     DayOfWeek // Enum: LUNDI, MARDI, etc.
   muscleTargets MuscleGroup[]
-  program       Program       @relation(fields: [programId], references: [id])
+  program       Program       @relation(fields: [programId], references: [id], onDelete: Cascade)
   programId     String
 }
 

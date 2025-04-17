@@ -82,13 +82,6 @@ export const navigationConfig: NavItem[] = [
                 icon: <Users className="w-5 h-5" />,
                 roles: [Role.ADMIN]
             },
-            {
-                id: "new",
-                title: "New User",
-                href: "/users/new",
-                icon: <UserPlus className="w-5 h-5" />,
-                roles: [Role.ADMIN]
-            }
         ]
     },
 ];

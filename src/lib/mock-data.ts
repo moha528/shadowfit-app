@@ -1,3 +1,5 @@
+import { $Enums } from "@prisma/client"
+
 // Types basés sur votre schéma Prisma
 enum Gender {
     MALE = "MALE",
@@ -35,8 +37,8 @@ enum Gender {
     id: "user_1",
     email: "user@example.com",
     name: "Mouhamadou Tidiane Seck",
-    gender: Gender.MALE,
-    role: Role.USER,
+    gender: $Enums.Gender.MALE,
+    role: $Enums.Role.USER,
     profileCompleted: true,
     goals: "Prendre du muscle et améliorer mon endurance",
     createdAt: new Date("2023-01-15"),
@@ -53,23 +55,23 @@ enum Gender {
     days: [
       {
         id: "day_1",
-        dayOfWeek: DayOfWeek.LUNDI,
-        muscleTargets: [MuscleGroup.CHEST, MuscleGroup.SHOULDERS],
+        dayOfWeek: $Enums.DayOfWeek.MONDAY,
+        muscleTargets: [$Enums.MuscleGroup.PECTORALS, $Enums.MuscleGroup.SHOULDERS],
       },
       {
         id: "day_2",
-        dayOfWeek: DayOfWeek.MERCREDI,
-        muscleTargets: [MuscleGroup.BACK, MuscleGroup.ARMS],
+        dayOfWeek: $Enums.DayOfWeek.WEDNESDAY,
+        muscleTargets: [$Enums.MuscleGroup.BACK, $Enums.MuscleGroup.BICEPS],
       },
       {
         id: "day_3",
-        dayOfWeek: DayOfWeek.VENDREDI,
-        muscleTargets: [MuscleGroup.LEGS, MuscleGroup.ABS],
+        dayOfWeek: $Enums.DayOfWeek.FRIDAY,
+        muscleTargets: [$Enums.MuscleGroup.LEGS, $Enums.MuscleGroup.ABDOMINALS],
       },
       {
         id: "day_4",
-        dayOfWeek: DayOfWeek.DIMANCHE,
-        muscleTargets: [MuscleGroup.CARDIO],
+        dayOfWeek: $Enums.DayOfWeek.SUNDAY,
+        muscleTargets: [$Enums.MuscleGroup.CALVES],
       },
     ],
   }

@@ -1,76 +1,156 @@
+"use client"
+
+import { useState } from "react"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Save } from "lucide-react"
+import { Loader2, Save } from "lucide-react"
 import { ProfileFormData } from "../types"
+import { profileSchema } from "../schemas"
+import { Gender } from "@prisma/client"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { updateProfile } from "@/actions/user.action"
+import { toastAlert } from "@/components/ui/sonner-v2"
 
-const ProfileForm = ({ 
-    formData, 
-    onFormDataChange, 
-    onGenderChange, 
-    onSubmit, 
-    onCancel 
-  }: { 
-    formData: ProfileFormData
-    onFormDataChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
-    onGenderChange: (value: string) => void
-    onSubmit: (e: React.FormEvent) => void
-    onCancel: () => void
-  }) => {
-    return (
-      <Card className="border-0 bg-background">
-        <CardHeader>
-          <CardTitle className="text-lg">Edit Profile</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={onSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" name="name" value={formData.name} onChange={onFormDataChange} required />
-            </div>
-  
-            <div className="space-y-2">
-              <Label>Gender</Label>
-              <RadioGroup value={formData.gender} onValueChange={onGenderChange} className="flex space-x-4">
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="MALE" id="male" />
-                  <Label htmlFor="male">Male</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="FEMALE" id="female" />
-                  <Label htmlFor="female">Female</Label>
-                </div>
-              </RadioGroup>
-            </div>
-  
-            <div className="space-y-2">
-              <Label htmlFor="goals">Goals</Label>
-              <Textarea
-                id="goals"
-                name="goals"
-                value={formData.goals}
-                onChange={onFormDataChange}
-                placeholder="Your fitness goals..."
-                rows={3}
-              />
-            </div>
-  
+interface ProfileFormProps {
+  initialData: ProfileFormData
+  onCancel: () => void
+}
+
+const ProfileForm = ({ initialData, onCancel }: ProfileFormProps) => {
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  const form = useForm<ProfileFormData>({
+    resolver: zodResolver(profileSchema),
+    defaultValues: initialData,
+  })
+
+  const handleSubmit = async (data: ProfileFormData) => {
+    setError(null)
+    setIsLoading(true)
+    try {
+      const result = await updateProfile(data)
+      if (result.success) {
+        toastAlert.success({
+          title: "Profile updated",
+          description: result.message,
+        })
+        onCancel()
+      } else {
+        toastAlert.error({
+          title: "Profile update failed",
+          description: result.message,
+        })
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An error occurred")
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  return (
+    <Card className="border-0 bg-background">
+      <CardHeader>
+        <CardTitle className="text-lg">Edit Profile</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="gender"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Gender</FormLabel>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      disabled={true}
+                      title="You can't change your gender"
+                      className="flex space-x-4"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value={Gender.MALE} id="male" />
+                        <Label htmlFor="male">Male</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value={Gender.FEMALE} id="female" />
+                        <Label htmlFor="female">Female</Label>
+                      </div>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="goals"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Goals</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      {...field}
+                      placeholder="Your fitness goals..."
+                      rows={3}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {error && (
+              <div className="text-sm text-destructive">{error}</div>
+            )}
+
             <div className="flex gap-2">
-              <Button type="submit" className="gap-1">
-                <Save className="h-4 w-4" />
-                Save
+              <Button type="submit" className="gap-1" disabled={isLoading}>
+                {isLoading ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Saving...
+                  </>
+                ) : (
+                  <>
+                    <Save className="h-4 w-4" />
+                    Save
+                  </>
+                )}
               </Button>
-              <Button type="button" variant="ghost" onClick={onCancel}>
+              <Button type="button" variant="ghost" onClick={onCancel} disabled={isLoading}>
                 Cancel
               </Button>
             </div>
           </form>
-        </CardContent>
-      </Card>
-    )
-  }
+        </Form>
+      </CardContent>
+    </Card>
+  )
+}
 
-  export default ProfileForm
+export default ProfileForm

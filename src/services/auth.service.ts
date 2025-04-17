@@ -1,11 +1,9 @@
-// lib/services/auth.service.ts
 import { headers } from "next/headers"
 import { auth } from "@/lib/auth"
-import {UserRepository} from "@/repository/user.repository";
-import {Gender} from "@prisma/client";
+import { UserRepository } from "@/repository/user.repository";
+import { Gender } from "@prisma/client";
 
 export const AuthService = {
-
     async updateEmailVerified(email: string) {
         const headersValue = await headers()
         const session = await auth.api.getSession({ headers: headersValue })
@@ -24,22 +22,23 @@ export const AuthService = {
 
         const user = await UserRepository.getUserByEmail(email)
         if (!user) {
-           return { error: "Utilisateur non trouvé" }
+            return { error: "Utilisateur non trouvé" }
         }
         if (!user.emailVerified) {
-           return { error: "Email non vérifié" }
+            return { error: "Email non vérifié" }
         }
     },
 
-    async addGenderAndCompleteProfile(gender:"male"|"female") {
+    async addGenderAndCompleteProfile(gender: "male" | "female") {
         const headersValue = await headers()
         const session = await auth.api.getSession({ headers: headersValue })
 
-        if (!session?.user ) {
+        if (!session?.user) {
             return { error: "Utilisateur non authentifié" }
         }
 
 
-        return UserRepository.updateUser(session.user.id, {profileCompleted:true, gender: gender === "male" ? Gender.MALE : Gender.FEMALE } )
+        return UserRepository.updateUser(session.user.id, { profileCompleted: true, gender: gender === "male" ? Gender.MALE : Gender.FEMALE })
     }
 }
+

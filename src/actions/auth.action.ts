@@ -1,4 +1,3 @@
-// actions/verify-email.ts
 "use server"
 
 import {AuthService} from "@/services/auth.service";
