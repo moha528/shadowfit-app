@@ -33,14 +33,14 @@ export function MainNav() {
   }
 
   return (
-    <header className="sticky top-0 z-99 w-full border-b border-zinc-800 bg-black">
+    <header className="sticky top-0 z-50 w-full border-b border-zinc-800 bg-black">
       <div className="flex h-16 items-center px-4 md:px-6">
         <div className="flex items-center gap-2 font-bold text-xl mr-6">
           <Dumbbell className="h-6 w-6 text-emerald-500" />
           <span>ShadowFit</span>
         </div>
 
-        <nav className="hidden md:flex items-center space-x-1 flex-1">
+        <nav className="hidden  md:flex items-center space-x-1 flex-1">
           {navigationConfig.map((route) => (
             <Link
               key={route.href}

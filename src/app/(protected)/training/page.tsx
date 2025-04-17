@@ -3,9 +3,9 @@
 import { useExercises } from "@/hooks/use-exercises"
 import { AnimatePresence } from "framer-motion"
 import { SearchBar } from "@/features/training/search-bar"
-import { ExerciseFilters } from "@/features/training/exercise-filters"
-import { ExerciseGrid } from "@/features/training/exercise-grid"
-import { ExerciseDetails } from "@/features/training/exercise-details"
+import { ExerciseFilters } from "@/features/training/exercise/exercise-filters"
+import { ExerciseGrid } from "@/features/training/exercise/exercise-grid"
+import { ExerciseDetails } from "@/features/training/exercise/exercise-details"
 
 const HomePage = () => {
     const {

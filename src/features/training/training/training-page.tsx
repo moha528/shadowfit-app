@@ -23,7 +23,7 @@ import {DeleteConfirmationModal} from "@/features/training/exercise/delete-confi
 import {EditExerciseModal} from "@/features/training/training/edit-exercise-modal";
 import {ExerciseFormValues} from "@/features/training/field-schema-form";
 
-export default function TrainingComponent({data}: {data: Exercise[]}) {
+export default function TrainingPage({data}: {data: Exercise[]}) {
     const [isLoading, setIsLoading] = useState(false)
     const [isEditModalOpen, setIsEditModalOpen] = useState(false)
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)

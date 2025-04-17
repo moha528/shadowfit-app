@@ -30,7 +30,8 @@ type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>
 export default function ResetPasswordPage() {
     const [isLoading, setIsLoading] = useState(false)
     const [isSuccess] = useState(false)
-    const [currentQuote] = useState(0)
+    const [currentQuote,setCurrentQuote] = useState(0)
+
     const searchParams = useSearchParams()
     const token = searchParams.get("token")
 
@@ -133,6 +134,7 @@ export default function ResetPasswordPage() {
                 backgroundImage={'url("/auth/reset-password.png")'}
                 motivationalQuotes={motivationalQuotes}
                 currentQuote={currentQuote}
+                setCurrentQuote={setCurrentQuote}
             />
 
             {/* Formulaire (côté gauche) */}

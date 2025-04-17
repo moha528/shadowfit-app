@@ -5,7 +5,7 @@ import { Dumbbell } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {Exercise} from "@/types/types";
 import { MuscleGroup} from "@prisma/client";
-import {ExerciseCard} from "@/features/training/exercise-card";
+import {ExerciseCard} from "@/features/training/exercise/exercise-card";
 
 
 interface ExerciseGridProps {

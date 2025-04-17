@@ -5,6 +5,7 @@
 import {TrainingService} from "@/services/training.service";
 import {Exercise} from "@prisma/client";
 import {revalidatePath} from "next/cache";
+import {CreateSessionData, TrainingSessionWithExercises, UpdateSessionData} from "@/types/types";
 
 
 
@@ -91,4 +92,58 @@ export async function getExercisesAction() {
     }
 
 
+}
+export async function createTrainingSessionAction(data: CreateSessionData) {
+    try{
+        const result = await TrainingService.createTrainingSessionExercises(data)
+        revalidatePath("/training/my")
+        return result as TrainingSessionWithExercises
+    } catch (error) {
+        return {
+            error: error instanceof Error
+                ? error.message
+                : "Oops we encountered an error while creating the training session. Please try again later."
+        }
+    }
+}
+
+export async function updateTrainingSessionAction(data: UpdateSessionData) {
+    try{
+        const result = await TrainingService.updateTrainingSessionExercises(data)
+        revalidatePath("/training/my")
+        return result as TrainingSessionWithExercises
+    } catch (error) {
+        return {
+            error: error instanceof Error
+                ? error.message
+                : "Oops we encountered an error while updating the training session. Please try again later."
+        }
+    }
+}
+
+export async function deleteTrainingSessionAction(id: string) {
+    try{
+        const result = await TrainingService.deleteTrainingSession(id)
+        revalidatePath("/training/my")
+        return result as TrainingSessionWithExercises
+    } catch (error) {
+        return {
+            error: error instanceof Error
+                ? error.message
+                : "Oops we encountered an error while deleting the training session. Please try again later."
+        }
+    }
+}
+
+export async function getTrainingSessionsAction() {
+    try{
+        const result = await TrainingService.getTrainingSessionByCurrentUser()
+        return result as TrainingSessionWithExercises[]
+    } catch (error) {
+        return {
+            error: error instanceof Error
+                ? error.message
+                : "Oops we encountered an error while fetching the training sessions. Please try again later."
+        }
+    }
 }

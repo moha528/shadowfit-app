@@ -23,7 +23,8 @@ type RegisterFormValues = z.infer<typeof registerSchema>
 
 export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false)
-  const [currentQuote] = useState(0)
+  const [currentQuote,setCurrentQuote] = useState(0)
+
 
 
   const motivationalQuotes = [
@@ -141,6 +142,7 @@ export default function RegisterPage() {
             backgroundImage={'url("/auth/register.png")'}
             motivationalQuotes={motivationalQuotes}
             currentQuote={currentQuote}
+            setCurrentQuote={setCurrentQuote}
         />
 
         {/* Formulaire d'inscription (côté gauche) */}

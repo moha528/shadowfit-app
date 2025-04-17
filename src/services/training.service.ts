@@ -6,6 +6,7 @@ import {Exercise, Gender} from "@prisma/client";
 import {headers} from "next/headers";
 import {auth} from "@/lib/auth";
 import {UserRepository} from "@/repository/user.repository";
+import {TrainingSessionRepository} from "@/repository/training-session.repository";
 
 export const TrainingService = {
 
@@ -75,6 +76,67 @@ export const TrainingService = {
         }
 
         return await ExerciseRepository.deleteExercise(id)
+    },
+
+    async createTrainingSessionExercises(data: {
+        notes?: string
+        exerciseIds: string[]
+    }) {
+        const headersValue = await headers()
+        const session = await auth.api.getSession({ headers: headersValue })
+
+        if (!session?.user) {
+            return { error: "User not found" }
+        }
+
+        return await TrainingSessionRepository.createTrainingSession(session.user.id,data)
+    },
+    async updateTrainingSessionExercises(data: {
+        id: string
+        notes?: string
+        exerciseIds: string[]
+    }) {
+        const headersValue = await headers()
+        const session = await auth.api.getSession({ headers: headersValue })
+
+        if (!session?.user) {
+            return { error: "User not found" }
+        }
+
+        return await TrainingSessionRepository.updateTrainingSession(data)
+    },
+
+    async deleteTrainingSession(id: string) {
+        const headersValue = await headers()
+        const session = await auth.api.getSession({ headers: headersValue })
+
+        if (!session?.user) {
+            return { error: "User not found" }
+        }
+
+        return await TrainingSessionRepository.deleteTrainingSession(id)
+    },
+
+    async getTrainingSessions() {
+        const headersValue = await headers()
+        const session = await auth.api.getSession({ headers: headersValue })
+
+        if (!session?.user) {
+            return { error: "User not found" }
+        }
+
+        return TrainingSessionRepository.getTrainingSessions();
+    },
+
+    async getTrainingSessionByCurrentUser() {
+        const headersValue = await headers()
+        const session = await auth.api.getSession({ headers: headersValue })
+
+        if (!session?.user) {
+            return { error: "User not found" }
+        }
+
+        return TrainingSessionRepository.getTrainingSessionsByUserId(session.user.id);
     },
 
 

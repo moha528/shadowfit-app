@@ -81,7 +81,7 @@ model TrainingSession {
   date      DateTime   @default(now())
   exercises Exercise[] @relation("SessionExercises")
   user      User       @relation(fields: [userId], references: [id])
-  userId    String     @unique
+  userId    String
   notes     String?
 }
 
