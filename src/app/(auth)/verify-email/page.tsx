@@ -24,7 +24,8 @@ type VerifyEmailFormValues = z.infer<typeof verifyEmailSchema>
 export default function VerifyEmailPage() {
     const [isLoading, setIsLoading] = useState(false)
     const [isVerified,] = useState(false)
-    const [currentQuote] = useState(0)
+    const [currentQuote,setCurrentQuote] = useState(0)
+
     const searchParams = useSearchParams()
     const email = searchParams.get("email")
 
@@ -168,6 +169,7 @@ export default function VerifyEmailPage() {
                 backgroundImage={'url("/auth/verify-email.png")'}
                 motivationalQuotes={motivationalQuotes}
                 currentQuote={currentQuote}
+                setCurrentQuote={setCurrentQuote}
             />
 
             {/* Formulaire (côté gauche) */}

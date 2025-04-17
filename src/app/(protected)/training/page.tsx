@@ -1,27 +1,19 @@
 "use client"
 
-import { useRouter } from "next/navigation"
-
 import { useExercises } from "@/hooks/use-exercises"
 import { AnimatePresence } from "framer-motion"
-
-import {SearchBar} from "@/features/training/search-bar";
-import {ExerciseFilters} from "@/features/training/exercise-filters";
-import {ExerciseGrid} from "@/features/training/exercise-grid";
-import {ExerciseDetails} from "@/features/training/exercise-details";
-
-import React from 'react';
-
+import { SearchBar } from "@/features/training/search-bar"
+import { ExerciseFilters } from "@/features/training/exercise/exercise-filters"
+import { ExerciseGrid } from "@/features/training/exercise/exercise-grid"
+import { ExerciseDetails } from "@/features/training/exercise/exercise-details"
 
 const HomePage = () => {
-    const router = useRouter()
     const {
         filteredExercises,
         searchQuery,
         setSearchQuery,
-        gender,
-        selectedMuscleGroup,
-        setSelectedMuscleGroup,
+        selectedMuscleGroups,
+        setSelectedMuscleGroups,
         selectedIntensity,
         setSelectedIntensity,
         selectedExercise,
@@ -35,18 +27,15 @@ const HomePage = () => {
     } = useExercises()
 
     return (
-        <div className="min-h-screen  text-white relative overflow-hidden">
-
-
-            {/* Main content */}
+        <div className="min-h-screen text-white relative overflow-hidden">
             <main className="container mx-auto px-4 py-6 relative z-10">
                 {/* Search and filters */}
                 <div className="mb-8 space-y-4">
                     <SearchBar
                         searchQuery={searchQuery}
                         setSearchQuery={setSearchQuery}
-                        selectedMuscleGroup={selectedMuscleGroup}
-                        setSelectedMuscleGroup={setSelectedMuscleGroup}
+                        selectedMuscleGroups={selectedMuscleGroups}
+                        setSelectedMuscleGroups={setSelectedMuscleGroups}
                         selectedIntensity={selectedIntensity}
                         setSelectedIntensity={setSelectedIntensity}
                         getMuscleGroupLabel={getMuscleGroupLabel}
@@ -54,8 +43,8 @@ const HomePage = () => {
                     />
 
                     <ExerciseFilters
-                        selectedMuscleGroups={selectedMuscleGroup}
-                        setSelectedMuscleGroup={setSelectedMuscleGroup}
+                        selectedMuscleGroups={selectedMuscleGroups}
+                        setSelectedMuscleGroups={setSelectedMuscleGroups}
                         selectedIntensity={selectedIntensity}
                         setSelectedIntensity={setSelectedIntensity}
                         resetFilters={resetFilters}
@@ -67,14 +56,13 @@ const HomePage = () => {
                 {/* Exercise grid */}
                 <ExerciseGrid
                     exercises={filteredExercises}
-                    gender={gender}
                     hoveredExercise={hoveredExercise}
                     setHoveredExercise={setHoveredExercise}
                     setSelectedExercise={setSelectedExercise}
-                    resetFilters={resetFilters}
                     getMuscleGroupLabel={getMuscleGroupLabel}
                     getIntensityLabel={getIntensityLabel}
                     getIntensityColor={getIntensityColor}
+                    resetFilters={resetFilters}
                 />
 
                 {/* Exercise details modal */}
@@ -82,7 +70,6 @@ const HomePage = () => {
                     {selectedExercise && (
                         <ExerciseDetails
                             exercise={selectedExercise}
-                            gender={gender}
                             onClose={() => setSelectedExercise(null)}
                             getMuscleGroupLabel={getMuscleGroupLabel}
                             getIntensityLabel={getIntensityLabel}
@@ -93,7 +80,6 @@ const HomePage = () => {
             </main>
         </div>
     )
-};
+}
 
-export default HomePage;
-
+export default HomePage

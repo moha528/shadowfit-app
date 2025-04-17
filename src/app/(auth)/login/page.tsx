@@ -24,7 +24,7 @@ type LoginFormValues = z.infer<typeof loginSchema>
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
-  const [currentQuote] = useState(0)
+  const [currentQuote,setCurrentQuote] = useState(0)
 
 
   const motivationalQuotes = [
@@ -38,7 +38,7 @@ export default function LoginPage() {
     },
     {
       text: "The pain you feel today will be the strength you feel tomorrow.",
-      author: "Arnold Schwarzenegger",
+      author: "Arnold Schwarzenegger"
     },
     {
       text: "The body achieves what the mind believes.",
@@ -157,6 +157,7 @@ export default function LoginPage() {
             backgroundImage={'url("/auth/login.png")'}
             motivationalQuotes={motivationalQuotes}
             currentQuote={currentQuote}
+            setCurrentQuote={setCurrentQuote}
         />
 
         {/* Formulaire de connexion (côté gauche) */}

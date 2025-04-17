@@ -82,7 +82,7 @@ export default async function middleware(request: NextRequest) {
                 });
 
                 if (matchingRoute && !matchingRoute.roles.includes(user.role.toString() as Role)) {
-                    return NextResponse.redirect(new URL('/not-found', request.url));
+                    return NextResponse.redirect(new URL('/not-found.tsx', request.url));
                 }
             }
         }

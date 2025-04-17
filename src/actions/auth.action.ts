@@ -11,7 +11,7 @@ export async function verifiedEmailAction(email: string) {
         return {
             error: error instanceof Error
                 ? error.message
-                : "Échec de la vérification de l'email"
+                : "OOps we encountered an error while verifying your email. Please try again later."
         }
     }
 }
@@ -23,7 +23,7 @@ export async function verifyEmailAction(email: string) {
     } catch  {
         return {
 
-            error :"Échec de la vérification de l'email"
+            error :" this email is not verified. Please check your inbox and verify your email address."
         }
     }
 }
@@ -36,7 +36,7 @@ export async function completeProfileAction(gender:"male"|"female"){
         return {
             error: error instanceof Error
                 ? error.message
-                : "Échec de la mise à jour du profil utilisateur. Veuillez réessayer plus tard."
+                : " OOps we encountered an error while completing your profile. Please try again later."
         }
     }
 }

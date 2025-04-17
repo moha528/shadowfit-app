@@ -3,14 +3,13 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { Dumbbell } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import {Exercise, MuscleGroup} from "@/types/types";
-import {Gender} from "@prisma/client";
-import {ExerciseCard} from "@/features/training/exercise-card";
+import {Exercise} from "@/types/types";
+import { MuscleGroup} from "@prisma/client";
+import {ExerciseCard} from "@/features/training/exercise/exercise-card";
 
 
 interface ExerciseGridProps {
   exercises: Exercise[]
-  gender: Gender
   hoveredExercise: string | null
   setHoveredExercise: (id: string | null) => void
   setSelectedExercise: (exercise: Exercise | null) => void
@@ -22,7 +21,6 @@ interface ExerciseGridProps {
 
 export function ExerciseGrid({
   exercises,
-  gender,
   hoveredExercise,
   setHoveredExercise,
   setSelectedExercise,
@@ -55,7 +53,6 @@ export function ExerciseGrid({
               <ExerciseCard
                 key={exercise.id}
                 exercise={exercise}
-                gender={gender}
                 isHovered={hoveredExercise === exercise.id}
                 onHover={() => setHoveredExercise(exercise.id)}
                 onLeave={() => setHoveredExercise(null)}
