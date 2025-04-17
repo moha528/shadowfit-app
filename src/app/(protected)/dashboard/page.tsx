@@ -1,11 +1,10 @@
 import React from 'react';
+import FeatureComingSoon from "@/components/coming-soon";
 
 
 const HomePage = () => {
     return (
-        <div className="container mx-auto py-10">
-            <h1 className="text-3xl font-bold">Dashboard</h1>
-        </div>
+        <FeatureComingSoon/>
     );
 };
 
