@@ -34,15 +34,16 @@ export default async function UsersPage({ searchParams }: UsersPageProps) {
 
 async function UsersTable({ searchParams }: UsersPageProps) {
   // Parse search params
-  const page = Number(searchParams.page) || 1
-  const perPage = Number(searchParams.per_page) || 10
-  const sort = searchParams.sort
-  const search = searchParams.search
+  const params = await searchParams
+  const page = Number(params.page) || 1
+  const perPage = Number(params.per_page) || 10
+  const sort = params.sort
+  const search = params.search
 
   // Get filter values
-  const roleFilter = Array.isArray(searchParams.role) ? searchParams.role : searchParams.role ? [searchParams.role] : []
-  const genderFilter = Array.isArray(searchParams.gender) ? searchParams.gender : searchParams.gender ? [searchParams.gender] : []
-  const profileCompletedFilter = Array.isArray(searchParams.profileCompleted) ? searchParams.profileCompleted : searchParams.profileCompleted ? [searchParams.profileCompleted] : []
+  const roleFilter = Array.isArray(params.role) ? params.role : params.role ? [params.role] : []
+  const genderFilter = Array.isArray(params.gender) ? params.gender : params.gender ? [params.gender] : []
+  const profileCompletedFilter = Array.isArray(params.profileCompleted) ? params.profileCompleted : params.profileCompleted ? [params.profileCompleted] : []
 
   // Fetch data with pagination, sorting, and filtering
   const data = await getUsersWithPagination({
