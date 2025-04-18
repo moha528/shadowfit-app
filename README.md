@@ -97,23 +97,22 @@ npx prisma db push
 npm run dev
 ```
 
-## 🎮 Démo
+4. Seed the database with demo data:
+```bash
+npx prisma db seed
+```
 
-L'application inclut deux comptes de démonstration :
+## 🎮 Demo Accounts
 
-### Compte Administrateur
-- **Email**: demo@gmail.com
-- **Mot de passe**: demo123
-- **Rôle**: ADMIN
-- **Statut**: Email vérifié et profil complété
+The application comes with two pre-configured demo accounts:
 
-### Compte Utilisateur
-- **Email**: user@example.com
-- **Mot de passe**: user123
-- **Rôle**: USER
-- **Statut**: Email vérifié et profil complété
+### Admin Account
+- Email: demo@gmail.com
+- Password: passer123
 
-> Note: Les mots de passe sont stockés de manière sécurisée avec bcryptjs (salt: 10)
+### User Account
+- Email: user@example.com
+- Password: passer123
 
 ## 📊 Tests
 
