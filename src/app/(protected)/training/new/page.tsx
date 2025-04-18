@@ -7,7 +7,6 @@ import { Skeleton } from "@/components/ui/skeleton"
 import ExerciseList from "@/features/training/training/training-page"
 import { getExercisesAction } from "@/actions/training.action"
 import CreateExercise from "@/features/training/training/create-exercise"
-import { Exercise } from "@prisma/client";
 import QuickTips from "@/features/training/training/quick-tips";
 import ExerciseStats from "@/features/training/training/exercise-stats";
 
@@ -28,30 +27,34 @@ export default async function NewTrainingPage({
                                               }: {
     searchParams: SearchParams
 }) {
-    // Retrieve exercises with applied filters
-    const exercisesResponse = await getExercisesAction({
-        search: searchParams.search,
-        muscleGroup: searchParams.muscleGroup,
-        intensity: searchParams.intensity,
-        gender: searchParams.gender,
-    })
+    // The issue is that searchParams should be awaited
+    const params = await searchParams
 
+    // Now use the awaited params
+    const exercises = await getExercisesAction({
+        search: params.search,
+        muscleGroup: params.muscleGroup,
+        intensity: params.intensity,
+        gender: params.gender,
+    })
     // Check if we have valid data
-    if (!exercisesResponse || !exercisesResponse.data || exercisesResponse.data.length === 0) {
+    if(!exercises || !exercises.data) {
         return (
             <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
                 <main className="container mx-auto px-4 py-8">
                     <div className="flex flex-col items-center justify-center h-full">
-                        <h1 className="text-3xl font-bold">No exercises found</h1>
-                        <p className="text-gray-400">Try modifying your search criteria.</p>
+                        <h1 className="text-3xl font-bold">Aucun exercice trouvé</h1>
+                        <p className="text-gray-400">Essayez de modifier vos critères de recherche.</p>
                     </div>
                 </main>
             </div>
         )
     }
 
+
+
     // Use filtered exercises
-    const filteredExercises = exercisesResponse.data;
+    const filteredExercises = exercises.data;
 
     return (
         <div className="min-h-screen text-white">
