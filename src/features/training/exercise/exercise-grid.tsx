@@ -73,7 +73,7 @@ export function ExerciseGrid({
             No exercises found
           </h3>
           <p className="text-zinc-400 max-w-md mb-8">
-            Try modifying your search criteria or select another exercise category.
+            Essayez de modifier vos critères de recherche ou sélectionnez une autre catégorie d&apos;exercices.
           </p>
           <Button
             variant="outline"

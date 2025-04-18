@@ -26,7 +26,7 @@ export const auth = betterAuth({
         },
         sendResetPassword: async ({user, url}) => {
             await resend.emails.send({
-                from: 'Acme <onboarding@resend.dev>',
+                from: 'no-reply@shadowfit-app.space',
                 to: user.email,
                 subject: "Password Reset",
                 react: await ResetPasswordEmailTemplate({firstName: user.name, resetLink: url}),
@@ -61,15 +61,15 @@ export const auth = betterAuth({
                         subject = "Email Verification";
                         text = `Your verification code is: ${otp}`;
                     } else if (type === "forget-password") {
-                        subject = "Password Reset";
-                        text = `Your OTP code for password reset is: ${otp}`;
+                        subject = "Réinitialisation de mot de passe";
+                        text = `Votre code OTP pour réinitialiser votre mot de passe est : ${otp}`;
                     } else {
                         subject = "Security Code";
                         text = `Your security code is: ${otp}`;
                     }
 
                     await resend.emails.send({
-                        from: 'Acme <onboarding@resend.dev>',
+                        from: 'no-reply@shadowfit-app.space',
                         to: email,
                         subject: subject,
                         react: await OtpEmailTemplate({firstName: email, otp: otp, type: type}),
