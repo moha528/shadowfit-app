@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 import { UserRepository } from "@/repository/user.repository";
 import { TrainingSessionRepository } from "@/repository/training-session.repository";
+import {FilterParams} from "@/types/types";
 
 export class TrainingService {
 
@@ -21,7 +22,7 @@ export class TrainingService {
 
     }
     
-    static async getTrainingExercises() {
+    static async getTrainingExercises(filters?: FilterParams) {
         const headersValue = await headers()
         const session = await auth.api.getSession({ headers: headersValue })
 

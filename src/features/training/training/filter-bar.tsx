@@ -2,6 +2,8 @@ import { Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Gender, MuscleGroup } from "@prisma/client"
+import { useRouter, useSearchParams } from "next/navigation"
+import { useCallback, useEffect } from "react"
 
 interface FilterBarProps {
     searchTerm: string
@@ -24,6 +26,50 @@ export function FilterBar({
                               genderFilter,
                               setGenderFilter
                           }: FilterBarProps) {
+    const router = useRouter()
+    const searchParams = useSearchParams()
+
+    // Update URL search parameters when filters change
+    const updateUrlParams = useCallback((key: string, value: string) => {
+        const params = new URLSearchParams(searchParams.toString())
+
+        if (value && value !== "ALL") {
+            params.set(key, value)
+        } else {
+            params.delete(key)
+        }
+
+        router.push(`?${params.toString()}`, { scroll: false })
+    }, [router, searchParams])
+
+    // Apply filters when URL params change
+    useEffect(() => {
+        const search = searchParams.get("search") || ""
+        const muscleGroup = searchParams.get("muscleGroup") || "ALL"
+        const intensity = searchParams.get("intensity") || "ALL"
+        const gender = searchParams.get("gender") || "ALL"
+
+        setSearchTerm(search)
+        setMuscleGroupFilter(muscleGroup)
+        setIntensityFilter(intensity)
+        setGenderFilter(gender)
+    }, [searchParams, setSearchTerm, setMuscleGroupFilter, setIntensityFilter, setGenderFilter])
+
+    // Handle search input with debouncing
+    const handleSearchChange = (value: string) => {
+        setSearchTerm(value)
+
+        // You could implement debouncing here
+        const params = new URLSearchParams(searchParams.toString())
+        if (value) {
+            params.set("search", value)
+        } else {
+            params.delete("search")
+        }
+
+        router.push(`?${params.toString()}`, { scroll: false })
+    }
+
     return (
         <div className="bg-zinc-900/70 rounded-xl shadow-2xl overflow-hidden border border-zinc-800 mb-8">
             <div className="p-6 border-b border-zinc-800">
@@ -36,14 +82,17 @@ export function FilterBar({
                             placeholder="Search exercises..."
                             className="pl-10 bg-zinc-800/50 border-zinc-700"
                             value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
+                            onChange={(e) => handleSearchChange(e.target.value)}
                         />
                     </div>
 
                     {/* Muscle Group Filter */}
                     <Select
                         value={muscleGroupFilter}
-                        onValueChange={setMuscleGroupFilter}
+                        onValueChange={(value) => {
+                            setMuscleGroupFilter(value)
+                            updateUrlParams("muscleGroup", value)
+                        }}
                     >
                         <SelectTrigger className="bg-zinc-800/50 border-zinc-700">
                             <SelectValue placeholder="Filter by muscle group" />
@@ -61,7 +110,10 @@ export function FilterBar({
                     {/* Intensity Filter */}
                     <Select
                         value={intensityFilter}
-                        onValueChange={setIntensityFilter}
+                        onValueChange={(value) => {
+                            setIntensityFilter(value)
+                            updateUrlParams("intensity", value)
+                        }}
                     >
                         <SelectTrigger className="bg-zinc-800/50 border-zinc-700">
                             <SelectValue placeholder="Filter by intensity" />
@@ -77,7 +129,10 @@ export function FilterBar({
                     {/* Gender Filter */}
                     <Select
                         value={genderFilter}
-                        onValueChange={setGenderFilter}
+                        onValueChange={(value) => {
+                            setGenderFilter(value)
+                            updateUrlParams("gender", value)
+                        }}
                     >
                         <SelectTrigger className="bg-zinc-800/50 border-zinc-700">
                             <SelectValue placeholder="Filter by gender" />

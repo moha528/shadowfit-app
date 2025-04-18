@@ -5,7 +5,7 @@
 import {TrainingService} from "@/services/training.service";
 import {Exercise} from "@prisma/client";
 import {revalidatePath} from "next/cache";
-import {CreateSessionData, TrainingSessionWithExercises, UpdateSessionData} from "@/types/types";
+import {CreateSessionData, FilterParams, TrainingSessionWithExercises, UpdateSessionData} from "@/types/types";
 
 
 
@@ -79,20 +79,35 @@ export async function deleteExerciseAction(id: string) {
 
 }
 
-export async function getExercisesAction() {
+
+
+export async function getExercisesAction(filters?: FilterParams) {
     try {
-        const result = await TrainingService.getTrainingExercises()
-        return {data: Array.isArray(result) ? result : []}
+        const result = await TrainingService.getTrainingExercises(filters)
+        return { data: Array.isArray(result) ? result : [] }
     } catch (error) {
         return {
             error: error instanceof Error
                 ? error.message
-                : "OOps we encountered an error while fetching the exercises. Please try again later."
+                : "Oops we encountered an error while fetching the exercises. Please try again later."
         }
     }
-
-
 }
+//
+// export async function getExercisesAction() {
+//     try {
+//         const result = await TrainingService.getTrainingExercises()
+//         return {data: Array.isArray(result) ? result : []}
+//     } catch (error) {
+//         return {
+//             error: error instanceof Error
+//                 ? error.message
+//                 : "OOps we encountered an error while fetching the exercises. Please try again later."
+//         }
+//     }
+//
+//
+// }
 export async function createTrainingSessionAction(data: CreateSessionData) {
     try{
         const result = await TrainingService.createTrainingSessionExercises(data)

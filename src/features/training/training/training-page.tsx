@@ -21,7 +21,7 @@ import {NoResultsFound} from "@/features/training/training/no-results-found";
 import {ExerciseListCard} from "@/features/training/training/exerice-list-card";
 import {DeleteConfirmationModal} from "@/features/training/exercise/delete-confirmation-modal";
 import {EditExerciseModal} from "@/features/training/training/edit-exercise-modal";
-import {ExerciseFormValues} from "@/features/training/field-schema-form";
+import {ExerciseFormValues} from "@/schemas/training.schema";
 
 export default function TrainingPage({data}: {data: Exercise[]}) {
     const [isLoading, setIsLoading] = useState(false)

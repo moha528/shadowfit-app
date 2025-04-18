@@ -10,6 +10,7 @@ import {toastAlert} from "@/components/ui/sonner-v2";
 import {toast} from "sonner";
 import {redirect} from "next/navigation";
 import { RegisterFormValues, registerSchema } from "@/schemas/auth.schema"
+import {registerFields} from "@/fields/register-fields";
 
 export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false)
@@ -41,36 +42,7 @@ export default function RegisterPage() {
   ]
 
   // Configuration des champs du formulaire avec typage strict
-  const registerFields: Array<{
-    type: "text" | "email" | "password"
-    name: keyof RegisterFormValues
-    label: string
-    placeholder: string
-    required: boolean
-  }> = [
-    {
-      type: "text",
-      name: "fullName",
-      label: "Full Name",
-      placeholder: "John Doe",
-      required: true,
-    },
-    {
-      type: "email",
-      name: "email",
-      label: "Email",
-      placeholder: "example@email.com",
-      required: true,
-    },
-    {
-      type: "password",
-      name: "password",
-      label: "Password",
-      placeholder: "••••••••",
-      required: true,
-    },
 
-  ]
   const verifyEmail = async (email: string) => {
     const {  error } = await authClient.emailOtp.sendVerificationOtp({
       email: email,

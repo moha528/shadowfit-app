@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma"
 import { Exercise, Gender, MuscleGroup } from "@prisma/client";
+import {FilterParams} from "@/types/types";
 
 export class ExerciseRepository {
 
@@ -36,8 +37,37 @@ export class ExerciseRepository {
         })
     }
 
-    static async getAllExercises() {
-        return await prisma.exercise.findMany()
+    static async getAllExercises(filters?: FilterParams) {
+        const whereClause: any = {}
+
+        // Apply search filter if provided
+        if (filters?.search) {
+            whereClause.OR = [
+                { name: { contains: filters.search, mode: 'insensitive' } },
+                { description: { contains: filters.search, mode: 'insensitive' } }
+            ]
+        }
+
+        // Apply muscle group filter if provided
+        if (filters?.muscleGroup && filters.muscleGroup !== "ALL") {
+            whereClause.muscleGroups = {
+                has: filters.muscleGroup as MuscleGroup
+            }
+        }
+
+        // Apply intensity filter if provided
+        if (filters?.intensity && filters.intensity !== "ALL") {
+            whereClause.intensity = parseInt(filters.intensity)
+        }
+
+        // Apply gender filter if provided
+        if (filters?.gender && filters?.gender !== "ALL") {
+            whereClause.type = filters.gender as Gender
+        }
+
+        return await prisma.exercise.findMany({
+            where: whereClause,
+        })
     }
 
     static async getExerciseById(id: string) {

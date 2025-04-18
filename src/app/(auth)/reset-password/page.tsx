@@ -10,6 +10,7 @@ import {redirect, useSearchParams} from "next/navigation"
 import { authClient } from "@/lib/authClient"
 import { toast } from "sonner"
 import { ResetPasswordFormValues, resetPasswordSchema } from "@/schemas/auth.schema"
+import {resetPasswordFields} from "@/fields/reset-password-fields";
 
 export default function ResetPasswordPage() {
     return (
@@ -50,28 +51,7 @@ function ResetPasswordContent() {
         },
     ]
 
-    const resetPasswordFields :Array<{
-        type: "text" | "email" | "password"
-        name: keyof ResetPasswordFormValues
-        label: string
-        placeholder: string
-        required: boolean
-    }> = [
-        {
-            type: "password",
-            name: "password",
-            label: "New Password",
-            placeholder: "••••••••",
-            required: true,
-        },
-        {
-            type: "password",
-            name: "confirmPassword",
-            label: "Confirm Password",
-            placeholder: "••••••••",
-            required: true,
-        },
-    ]
+
 
     const handleSubmit = async (values: ResetPasswordFormValues) => {
         if (!token) {

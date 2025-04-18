@@ -11,6 +11,7 @@ import { authClient } from "@/lib/authClient"
 import { toast } from "sonner"
 import {verifiedEmailAction} from "@/actions/auth.action";
 import { VerifyEmailFormValues, verifyEmailSchema } from "@/schemas/auth.schema"
+import {verifyEmailFields} from "@/fields/verify-email-fields";
 
 function VerifyEmailContent() {
     const [isLoading, setIsLoading] = useState(false)
@@ -39,21 +40,7 @@ function VerifyEmailContent() {
         },
     ]
 
-    const verifyEmailFields:Array<{
-        type: "text" | "email" | "password" | "otp"
-        name: keyof VerifyEmailFormValues
-        label: string
-        placeholder: string
-        required: boolean
-    }> = [
-        {
-            type: "otp",
-            name: "otp",
-            label: "Verification Code",
-            placeholder: "123456",
-            required: true,
-        },
-    ]
+
 
     const handleSubmit = async (values: VerifyEmailFormValues) => {
         if (!email) {
@@ -192,7 +179,7 @@ function VerifyEmailContent() {
                                 disabled={isLoading}
                                 className="text-sm text-gray-400 hover:text-gray-300 disabled:opacity-50 transition-colors duration-300"
                             >
-                                Didn't receive a code? <span className="underline">Resend</span>
+                                Didn&apos;t receive a code? <span className="underline">Resend</span>
                             </button>
                         </div>
                     )}

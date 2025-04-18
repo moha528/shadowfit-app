@@ -9,6 +9,7 @@ import { toast } from "sonner"
 import {authClient} from "@/lib/authClient";
 import {verifyEmailAction} from "@/actions/auth.action";
 import { ForgotPasswordFormValues, forgotPasswordSchema } from "@/schemas/user.schema"
+import {forgotPasswordFields} from "@/fields/forgot-password-fields";
 
 export default function ForgotPasswordPage() {
   const [isLoading, setIsLoading] = useState(false)
@@ -38,21 +39,7 @@ export default function ForgotPasswordPage() {
   ]
 
   // Configuration des champs du formulaire
-  const forgotPasswordFields: Array<{
-    type: "email"
-    name: keyof ForgotPasswordFormValues
-    label: string
-    placeholder: string
-    required: boolean
-  }> = [
-    {
-      type: "email",
-      name: "email",
-      label: "Email",
-      placeholder: "example@email.com",
-      required: true,
-    },
-  ]
+
 
   const handleSubmit = async (values: ForgotPasswordFormValues) => {
     setIsLoading(true)

@@ -11,7 +11,7 @@ import {Progress} from "@/components/ui/progress";
 import {exerciseFields} from "@/fields/exercise-fields";
 import { ExerciseFormValues, exerciseSchema } from "@/schemas/training.schema"
 
-export default function ExerciseFormPage() {
+export default function CreateExercise() {
     const [isLoading, setIsLoading] = useState(false)
     const { edgestore } = useEdgeStore();
     const [uploadProgress, setUploadProgress] = useState(0)
@@ -91,7 +91,7 @@ export default function ExerciseFormPage() {
 
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div className=" gap-8">
                     {/* Colonne principale avec le formulaire */}
                     <div className="col-span-2">
                         <div className="bg-zinc-900/70 rounded-xl shadow-2xl overflow-hidden border border-zinc-800">
@@ -131,43 +131,43 @@ export default function ExerciseFormPage() {
                     </div>
 
                     {/* Colonne latérale avec les conseils */}
-                    <div className="hidden lg:block">
-                        <div className="bg-zinc-900/70 rounded-xl shadow-2xl p-6 border border-zinc-800 mb-6">
-                            <h3 className="text-xl font-bold text-white flex items-center mb-4">
-                                <Info className="w-5 h-5 mr-2 text-sky-400" />
-                                Tips for Creating Exercises
-                            </h3>
-                            <ul className="mt-6 space-y-4 text-zinc-300">
-                                <li className="flex items-start">
-                                    <span className="bg-gradient-to-r from-sky-500 to-sky-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-3 mt-0.5 shadow-lg shadow-sky-500/20">
-                                        <Check className="w-3 h-3" />
-                                    </span>
-                                    <span>Choose a descriptive name without spaces</span>
-                                </li>
-                                <li className="flex items-start">
-                                    <span className="bg-gradient-to-r from-sky-500 to-sky-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-3 mt-0.5 shadow-lg shadow-sky-500/20">
-                                        <Check className="w-3 h-3" />
-                                    </span>
-                                    <span>Include detailed step-by-step instructions</span>
-                                </li>
-                                <li className="flex items-start">
-                                    <span className="bg-gradient-to-r from-sky-500 to-sky-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-3 mt-0.5 shadow-lg shadow-sky-500/20">
-                                        <Check className="w-3 h-3" />
-                                    </span>
-                                    <span>Select up to 3 primary muscle groups</span>
-                                </li>
-                                <li className="flex items-start">
-                                    <span className="bg-gradient-to-r from-sky-500 to-sky-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-3 mt-0.5 shadow-lg shadow-sky-500/20">
-                                        <Check className="w-3 h-3" />
-                                    </span>
-                                    <span>Add a clear image showing proper form</span>
-                                </li>
-                            </ul>
+                    {/*<div className="hidden lg:block">*/}
+                    {/*    <div className="bg-zinc-900/70 rounded-xl shadow-2xl p-6 border border-zinc-800 mb-6">*/}
+                    {/*        <h3 className="text-xl font-bold text-white flex items-center mb-4">*/}
+                    {/*            <Info className="w-5 h-5 mr-2 text-sky-400" />*/}
+                    {/*            Tips for Creating Exercises*/}
+                    {/*        </h3>*/}
+                    {/*        <ul className="mt-6 space-y-4 text-zinc-300">*/}
+                    {/*            <li className="flex items-start">*/}
+                    {/*                <span className="bg-gradient-to-r from-sky-500 to-sky-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-3 mt-0.5 shadow-lg shadow-sky-500/20">*/}
+                    {/*                    <Check className="w-3 h-3" />*/}
+                    {/*                </span>*/}
+                    {/*                <span>Choose a descriptive name without spaces</span>*/}
+                    {/*            </li>*/}
+                    {/*            <li className="flex items-start">*/}
+                    {/*                <span className="bg-gradient-to-r from-sky-500 to-sky-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-3 mt-0.5 shadow-lg shadow-sky-500/20">*/}
+                    {/*                    <Check className="w-3 h-3" />*/}
+                    {/*                </span>*/}
+                    {/*                <span>Include detailed step-by-step instructions</span>*/}
+                    {/*            </li>*/}
+                    {/*            <li className="flex items-start">*/}
+                    {/*                <span className="bg-gradient-to-r from-sky-500 to-sky-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-3 mt-0.5 shadow-lg shadow-sky-500/20">*/}
+                    {/*                    <Check className="w-3 h-3" />*/}
+                    {/*                </span>*/}
+                    {/*                <span>Select up to 3 primary muscle groups</span>*/}
+                    {/*            </li>*/}
+                    {/*            <li className="flex items-start">*/}
+                    {/*                <span className="bg-gradient-to-r from-sky-500 to-sky-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-3 mt-0.5 shadow-lg shadow-sky-500/20">*/}
+                    {/*                    <Check className="w-3 h-3" />*/}
+                    {/*                </span>*/}
+                    {/*                <span>Add a clear image showing proper form</span>*/}
+                    {/*            </li>*/}
+                    {/*        </ul>*/}
 
-                        </div>
+                    {/*    </div>*/}
 
 
-                    </div>
+                    {/*</div>*/}
                 </div>
             </div>
         </div>

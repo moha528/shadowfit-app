@@ -10,6 +10,7 @@ import {toast} from "sonner";
 import {verifyEmailAction} from "@/actions/auth.action";
 import {redirect} from "next/navigation";
 import { LoginFormValues, loginSchema } from "@/schemas/auth.schema"
+import {loginFields} from "@/fields/login-fields";
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
@@ -39,28 +40,7 @@ export default function LoginPage() {
     },
   ]
 
-  const loginFields: Array<{
-    type: "email" | "password"
-    name: keyof LoginFormValues
-    label: string
-    placeholder: string
-    required: boolean
-  }> = [
-    {
-      type: "email",
-      name: "email",
-      label: "Email",
-      placeholder: "example@email.com",
-      required: true,
-    },
-    {
-      type: "password",
-      name: "password",
-      label: "Password",
-      placeholder: "••••••••",
-      required: true,
-    },
-  ]
+
 
   const verifyEmail = async (email: string ) => {
     const {  error } = await authClient.emailOtp.sendVerificationOtp({
