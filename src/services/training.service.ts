@@ -28,13 +28,10 @@ export const TrainingService = {
      const session = await auth.api.getSession({ headers: headersValue })
 
      if (!session?.user) {
-         return { error: "User not found" }
+         return []
      }
 
-
-
      return await  ExerciseRepository.getAllExercises()
-
  },
 
  async createTrainingExercises(data: {

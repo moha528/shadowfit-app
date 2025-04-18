@@ -82,7 +82,7 @@ export async function deleteExerciseAction(id: string) {
 export async function getExercisesAction() {
     try {
         const result = await TrainingService.getTrainingExercises()
-        return {data: result}
+        return {data: Array.isArray(result) ? result : []}
     } catch (error) {
         return {
             error: error instanceof Error

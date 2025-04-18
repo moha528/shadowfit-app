@@ -37,11 +37,11 @@ export default function TrainingPage({data}: {data: Exercise[]}) {
     const { edgestore } = useEdgeStore()
 
     // Filter exercises based on current filter settings
-    const filteredExercises = data.filter(exercise => {
+    const filteredExercises = (Array.isArray(data) ? data : []).filter(exercise => {
         // Apply search term filter
         if (searchTerm &&
             !exercise.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-            !exercise.description.toLowerCase().includes(searchTerm.toLowerCase())) {
+            !(exercise.description?.toLowerCase() || "").includes(searchTerm.toLowerCase())) {
             return false
         }
 
@@ -114,7 +114,7 @@ export default function TrainingPage({data}: {data: Exercise[]}) {
                 intensity: values.intensity,
                 type: values.type,
                 image: imageUrl ? imageUrl : "",
-            })
+            } as Partial<Exercise>)
 
             if (result.error) {
                 toastAlert.error({
