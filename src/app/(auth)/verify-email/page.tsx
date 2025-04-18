@@ -1,7 +1,7 @@
 // verify-email-page.tsx
 "use client"
 
-import { useState } from "react"
+import { useState, Suspense } from "react"
 import { z } from "zod"
 import { Dumbbell } from "lucide-react"
 import SideImageForm from "@/features/auth/side-image-form"
@@ -21,7 +21,7 @@ const verifyEmailSchema = z.object({
 
 type VerifyEmailFormValues = z.infer<typeof verifyEmailSchema>
 
-export default function VerifyEmailPage() {
+function VerifyEmailContent() {
     const [isLoading, setIsLoading] = useState(false)
     const [isVerified,] = useState(false)
     const [currentQuote,setCurrentQuote] = useState(0)
@@ -218,5 +218,13 @@ export default function VerifyEmailPage() {
                 </div>
             </div>
         </div>
+    )
+}
+
+export default function VerifyEmailPage() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <VerifyEmailContent />
+        </Suspense>
     )
 }

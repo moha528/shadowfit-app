@@ -1,6 +1,7 @@
 "use client"
 
 import type * as React from "react"
+import { Suspense } from "react"
 import type { Column } from "@tanstack/react-table"
 import { Check, PlusCircle } from "lucide-react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
@@ -31,7 +32,7 @@ interface DataTableFacetedFilterProps<TData, TValue> {
   createQueryString: (params: Record<string, string | number | null>) => string
 }
 
-export function DataTableFacetedFilter<TData, TValue>({
+function DataTableFacetedFilterContent<TData, TValue>({
   column,
   title,
   options,
@@ -144,5 +145,13 @@ export function DataTableFacetedFilter<TData, TValue>({
         </Command>
       </PopoverContent>
     </Popover>
+  )
+}
+
+export function DataTableFacetedFilter<TData, TValue>(props: DataTableFacetedFilterProps<TData, TValue>) {
+  return (
+    <Suspense fallback={<div>Loading filter...</div>}>
+      <DataTableFacetedFilterContent {...props} />
+    </Suspense>
   )
 }

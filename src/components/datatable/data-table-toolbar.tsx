@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { Suspense } from "react"
 import type { Table } from "@tanstack/react-table"
 import { X } from "lucide-react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
@@ -28,7 +29,7 @@ interface DataTableToolbarProps<TData> {
   createQueryString: (params: Record<string, string | number | null>) => string
 }
 
-export function DataTableToolbar<TData>({
+function DataTableToolbarContent<TData>({
   table,
   filterableColumns = [],
   searchableColumns = [],
@@ -127,5 +128,13 @@ export function DataTableToolbar<TData>({
       </div>
       <DataTableViewOptions table={table} />
     </div>
+  )
+}
+
+export function DataTableToolbar<TData>(props: DataTableToolbarProps<TData>) {
+  return (
+    <Suspense fallback={<div>Loading toolbar...</div>}>
+      <DataTableToolbarContent {...props} />
+    </Suspense>
   )
 }

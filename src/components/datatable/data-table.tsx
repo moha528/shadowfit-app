@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { Suspense } from "react"
 import {
   type ColumnDef,
   type ColumnFiltersState,
@@ -40,7 +41,7 @@ interface DataTableProps<TData, TValue> {
   defaultPageSize?: number
 }
 
-export function DataTable<TData, TValue>({
+function DataTableContent<TData, TValue>({
   columns,
   data,
   filterableColumns = [],
@@ -195,5 +196,13 @@ export function DataTable<TData, TValue>({
         <DataTablePagination table={table} />
       </div>
     </div>
+  )
+}
+
+export function DataTable<TData, TValue>(props: DataTableProps<TData, TValue>) {
+  return (
+    <Suspense fallback={<div>Loading table...</div>}>
+      <DataTableContent {...props} />
+    </Suspense>
   )
 }
