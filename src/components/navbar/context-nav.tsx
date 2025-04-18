@@ -3,8 +3,13 @@
 import { usePathname } from "next/navigation"
 import { SubNav } from "./sub-nav"
 import { navigationConfig } from "@/lib/nav-config"
+import { User } from "@prisma/client"
 
-export function ContextNav() {
+interface ContextNavProps {
+  user: User
+}
+
+export function ContextNav({ user }: ContextNavProps) {
   const pathname = usePathname()
 
   // Déterminer la section active
@@ -13,5 +18,5 @@ export function ContextNav() {
     if (pathname.startsWith(item.href))
       section = item.href
 
-  return <SubNav section={section} />
+  return <SubNav section={section} user={user} />
 }

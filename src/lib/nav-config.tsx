@@ -1,4 +1,4 @@
-import {Home, User, Users, Activity, UserPlus, Calendar, ActivityIcon} from "lucide-react";
+import {Home, User, Users, Activity, ActivityIcon} from "lucide-react";
 import { Role } from "@prisma/client";
 
 interface NavItem {
@@ -48,7 +48,7 @@ export const navigationConfig: NavItem[] = [
                 title: "New Training",
                 href: "/training/new",
                 icon: <Activity className="w-5 h-5" />,
-                roles: [Role.USER, Role.ADMIN]
+                roles: [Role.ADMIN]
             },
             {
                 id: "my",

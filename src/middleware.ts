@@ -78,11 +78,22 @@ export default async function middleware(request: NextRequest) {
 
                 const matchingRoute = navItems.find(item => {
                     const routePath = item.href.startsWith('/') ? item.href.slice(1) : item.href;
-                    // ... (logique de matching existante)
+                    return currentPathPattern.startsWith(routePath);
                 });
 
-                if (matchingRoute && !matchingRoute.roles.includes(user.role.toString() as Role)) {
-                    return NextResponse.redirect(new URL('/not-found.tsx', request.url));
+                if (matchingRoute) {
+                    // Check if the route is admin-only
+                    const isAdminOnly = matchingRoute.roles.length === 1 && matchingRoute.roles[0] === Role.ADMIN;
+                    
+                    // If user is not admin and trying to access admin-only route, redirect to not-found
+                    if (isAdminOnly && user.role !== Role.ADMIN) {
+                        return NextResponse.redirect(new URL('/not-found', request.url));
+                    }
+                    
+                    // Check if user's role is allowed for this route
+                    if (!matchingRoute.roles.includes(user.role.toString() as Role)) {
+                        return NextResponse.redirect(new URL('/not-found', request.url));
+                    }
                 }
             }
         }

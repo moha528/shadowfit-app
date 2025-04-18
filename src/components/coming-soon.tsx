@@ -54,8 +54,7 @@ export default function FeatureComingSoon() {
     if (!mounted) return null
 
     return (
-        <div className="login-container flex min-h-screen bg-black overflow-hidden">
-            {/* Side image (left side) */}
+        <div className="login-container flex min-h-[calc(100vh-170px)] h-[calc(100vh-170px)] max-h-auto overflow-y-auto bg-black overflow-hidden">
             <SideImageForm
                 backgroundImage={'url("/coming-soon.png")'}
                 motivationalQuotes={motivationalQuotes}
@@ -63,7 +62,6 @@ export default function FeatureComingSoon() {
                 setCurrentQuote={setCurrentQuote}
             />
 
-            {/* Content (right side) */}
             <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
                 <div className="max-w-md w-full">
                     <div className="flex flex-col items-center mb-10 transition-all duration-300">

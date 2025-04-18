@@ -2,7 +2,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Progress } from "@/components/ui/progress"
 import { CrudForm } from "@/components/crud-form"
 import {Exercise} from "@prisma/client";
-import {exerciseFields, ExerciseFormValues, exerciseSchema} from "@/features/training/field-schema-form";
+import {ExerciseFormValues, exerciseSchema} from "@/schemas/training.schema";
+import { exerciseFields } from "../field-schema-form";
 
 
 
@@ -62,7 +63,7 @@ export function EditExerciseModal({
                             {/* Edit form */}
                             <CrudForm
                                 schema={exerciseSchema}
-                                fields={exerciseFields}
+                                fields={exerciseFields as any}
                                 mode="edit"
                                 initialData={initialValues}
                                 isLoading={isLoading}
