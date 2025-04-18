@@ -100,7 +100,7 @@ model Program {
   id        String       @id @default(cuid())
   startDate DateTime
   endDate   DateTime
-  user      User         @relation(fields: [userId], references: [id])
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String       @unique
   days      ProgramDay[]
 }
