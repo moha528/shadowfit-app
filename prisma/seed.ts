@@ -85,7 +85,7 @@ export async function main() {
       data: {
         id: `acc_${user.id}`,
         accountId: user.id,
-        providerId: "credentials",
+        providerId: "credential",
         userId: user.id,
         password: hashedPassword,
         createdAt: new Date(),
