@@ -1,7 +1,7 @@
 // reset-password-page.tsx
 "use client"
 
-import { useState } from "react"
+import { useState, Suspense } from "react"
 import { z } from "zod"
 import { Dumbbell } from "lucide-react"
 import SideImageForm from "@/features/auth/side-image-form"
@@ -28,6 +28,18 @@ const resetPasswordSchema = z.object({
 type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>
 
 export default function ResetPasswordPage() {
+    return (
+        <Suspense fallback={
+            <div className="flex min-h-screen items-center justify-center">
+                <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-200"></div>
+            </div>
+        }>
+            <ResetPasswordContent />
+        </Suspense>
+    );
+}
+
+function ResetPasswordContent() {
     const [isLoading, setIsLoading] = useState(false)
     const [isSuccess] = useState(false)
     const [currentQuote,setCurrentQuote] = useState(0)
@@ -124,7 +136,6 @@ export default function ResetPasswordPage() {
         });
 
         setIsLoading(false);
-
     }
 
     return (
@@ -144,8 +155,8 @@ export default function ResetPasswordPage() {
                         <div className="flex items-center gap-2 font-bold text-2xl mb-4 logo-glow">
                             <Dumbbell className="h-7 w-7 text-gray-400" />
                             <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-200 to-gray-500">
-                ShadowFit
-              </span>
+                                ShadowFit
+                            </span>
                         </div>
                         <h1 className="text-3xl font-bold mb-2">
                             {isSuccess ? "Password updated" : "Reset your password"}
