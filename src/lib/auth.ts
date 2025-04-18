@@ -61,8 +61,8 @@ export const auth = betterAuth({
                         subject = "Email Verification";
                         text = `Your verification code is: ${otp}`;
                     } else if (type === "forget-password") {
-                        subject = "Password Reset";
-                        text = `Your OTP for resetting your password is: ${otp}`;
+                        subject = "Réinitialisation de mot de passe";
+                        text = `Votre code OTP pour réinitialiser votre mot de passe est : ${otp}`;
                     } else {
                         subject = "Security Code";
                         text = `Your security code is: ${otp}`;

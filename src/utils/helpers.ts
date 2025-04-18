@@ -1,11 +1,11 @@
 export const getDifficultyLabel = (difficulty: string) => {
     switch (difficulty) {
         case "beginner":
-            return "Débutant"
+            return "Beginner"
         case "intermediate":
-            return "Intermédiaire"
+            return "Intermediate" 
         case "advanced":
-            return "Avancé"
+            return "Advanced"
         default:
             return difficulty
     }
@@ -26,18 +26,18 @@ export const getDifficultyColor = (difficulty: string) => {
 
 export const getMuscleGroupLabel = (muscle: string) => {
     const muscleLabels: { [key: string]: string } = {
-        abs: "Abdominaux",
-        core: "Sangle abdominale",
-        chest: "Pectoraux",
-        back: "Dos",
-        shoulders: "Épaules",
+        abs: "Abs",
+        core: "Core",
+        chest: "Chest",
+        back: "Back", 
+        shoulders: "Shoulders",
         biceps: "Biceps",
         triceps: "Triceps",
-        forearms: "Avant-bras",
+        forearms: "Forearms",
         quadriceps: "Quadriceps",
-        hamstrings: "Ischio-jambiers",
-        glutes: "Fessiers",
-        "full body": "Corps entier",
+        hamstrings: "Hamstrings",
+        glutes: "Glutes",
+        "full body": "Full Body",
     }
 
     return muscleLabels[muscle] || muscle

@@ -69,12 +69,12 @@ export const useProgramForm = (userId: string) => {
         const result = await createProgram(userId, data.startDate, data.endDate, data.days)
 
         if (result.success) {
-            toast.success("Programme créé avec succès")
+            toast.success("Program created successfully")
             setIsOpen(false)
             form.reset()
             setHasExistingProgram(true)
         } else {
-            toast.error("Erreur lors de la création du programme")
+            toast.error("Error creating program")
         }
     }
 

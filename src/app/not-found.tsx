@@ -64,7 +64,7 @@ export default function NotFoundPage() {
 
           <div className="space-y-6">
             <div className="text-zinc-400 text-center">
-              <p>We can't find the page you're looking for.</p>
+              <p>We can&apos;t find the page you&apos;re looking for.</p>
               <p>Check the URL or go back home.</p>
             </div>
 

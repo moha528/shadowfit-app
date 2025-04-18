@@ -74,7 +74,7 @@ export function ExerciseFilters({
                         className="w-72 bg-zinc-900 border-zinc-800/50 shadow-xl shadow-black/40 rounded-xl p-2"
                     >
                         <div className="flex justify-between items-center mb-2 px-2">
-                            <h3 className="text-sm font-semibold text-white">Filtres</h3>
+                            <h3 className="text-sm font-semibold text-white">Filters</h3>
                             {hasActiveFilters && (
                                 <Button
                                     variant="ghost"
@@ -85,7 +85,7 @@ export function ExerciseFilters({
                                     }}
                                     className="text-xs text-zinc-400 hover:text-zinc-200 p-1 h-7"
                                 >
-                                    Réinitialiser
+                                    Reset
                                 </Button>
                             )}
                         </div>
@@ -123,7 +123,7 @@ export function ExerciseFilters({
                         <div className="border-b border-zinc-800 my-2"></div>
 
                         <div>
-                            <div className="p-2 text-sm font-medium text-white">Intensité</div>
+                            <div className="p-2 text-sm font-medium text-white">Intensity</div>
                             <div className="flex gap-2 px-2">
                                 {[1, 2, 3].map((intensity) => (
                                     <div
@@ -146,7 +146,7 @@ export function ExerciseFilters({
                                 className="bg-blue-600 hover:bg-blue-700 text-white"
                                 onClick={() => setIsFilterOpen(false)}
                             >
-                                Appliquer
+                                Apply
                             </Button>
                         </div>
                     </DropdownMenuContent>

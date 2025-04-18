@@ -7,15 +7,15 @@ export const programFormSchema = z.object({
     days: z.array(
         z.object({
             dayOfWeek: z.nativeEnum(DayOfWeek),
-            muscleTargets: z.array(z.nativeEnum(MuscleGroup)).min(1, "Au moins un groupe musculaire est requis"),
+            muscleTargets: z.array(z.nativeEnum(MuscleGroup)).min(1, "At least one muscle group is required"),
         })
-    ).min(1, "Au moins un jour d'entraînement est requis"),
+    ).min(1, "At least one training day is required"),
 }).refine(
     (data) => {
         return data.endDate > data.startDate;
     },
     {
-        message: "La date de fin doit être postérieure à la date de début",
+        message: "End date must be after start date",
         path: ["endDate"],
     }
 ).refine(
@@ -24,7 +24,7 @@ export const programFormSchema = z.object({
         return new Set(days).size === days.length;
     },
     {
-        message: "Chaque jour ne peut être sélectionné qu'une seule fois",
+        message: "Each day can only be selected once",
         path: ["days"],
     }
 );

@@ -9,7 +9,7 @@ export class AuthService {
         const session = await auth.api.getSession({ headers: headersValue })
 
         if (!session?.user || session.user.email !== email) {
-            return { error: "Utilisateur non authentifié" }
+            return { error: "User not authenticated" }
         }
 
         return await UserRepository.updateUser(session.user.id, {

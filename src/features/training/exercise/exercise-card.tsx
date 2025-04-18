@@ -17,7 +17,7 @@ interface ExerciseCardProps {
   getMuscleGroupLabel: (muscle: MuscleGroup) => string
   getIntensityLabel: (intensity: number) => string
   getIntensityColor: (intensity: number) => string
-}
+} 
 
 export function ExerciseCard({
   exercise,
@@ -112,14 +112,14 @@ export function ExerciseCard({
         </Badge>
       </div>
 
-      {/* Voir détails button */}
+      {/* See details button */}
       <div
         className={`absolute bottom-[100px] right-4 z-30 transition-all duration-500 ${
           isHovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
         }`}
       >
         <Badge className="bg-white text-black hover:bg-zinc-200 text-xs flex items-center gap-1 shadow-lg shadow-black/20 px-3 py-1">
-          Voir détails <ChevronRight className="h-3 w-3" />
+          See details <ChevronRight className="h-3 w-3" />
         </Badge>
       </div>
     </motion.div>
