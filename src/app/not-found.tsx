@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import SideImageForm from "@/features/auth/side-image-form";
 
 export default function NotFoundPage() {
-  const [currentQuote,setCurrentQuote] = useState(0)
+  const [currentQuote, setCurrentQuote] = useState(0)
 
   const motivationalQuotes = [
     {
@@ -53,8 +53,8 @@ export default function NotFoundPage() {
               </span>
             </div>
 
-            <h1 className="text-3xl font-bold mb-2 text-center">Page introuvable</h1>
-            <p className="text-zinc-400 text-center">La page que vous recherchez n&apos;existe pas ou a été déplacée</p>
+            <h1 className="text-3xl font-bold mb-2 text-center">Page Not Found</h1>
+            <p className="text-zinc-400 text-center">The page you are looking for does not exist or has been moved</p>
           </div>
 
           {/* Mobile only 404 */}
@@ -64,14 +64,14 @@ export default function NotFoundPage() {
 
           <div className="space-y-6">
             <div className="text-zinc-400 text-center">
-              <p>Nous ne trouvons pas la page que vous recherchez.</p>
-              <p>Vérifiez l&apos;URL ou retournez à l&apos;accueil.</p>
+              <p>We can't find the page you're looking for.</p>
+              <p>Check the URL or go back home.</p>
             </div>
 
             <div className="pt-4">
               <Button className="w-full h-12 bg-gray-800 hover:bg-gray-700 text-white group" asChild>
                 <Link href="/">
-                  Retour à l&apos;accueil
+                  Go Home
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
@@ -79,17 +79,13 @@ export default function NotFoundPage() {
 
             <div className="relative flex items-center py-5">
               <div className="flex-grow border-t border-gray-800"></div>
-              <span className="flex-shrink mx-4 text-zinc-500">ou</span>
+              <span className="flex-shrink mx-4 text-zinc-500">or</span>
               <div className="flex-grow border-t border-gray-800"></div>
             </div>
 
             <div className="flex flex-col space-y-4">
               <Button variant="outline" className="w-full h-12 border-gray-800 hover:bg-gray-800 text-white" asChild>
                 <Link href="/contact">Contact us</Link>
-              </Button>
-
-              <Button variant="outline" className="w-full h-12 border-gray-800 hover:bg-gray-800 text-white" asChild>
-                <Link href="/search">Search</Link>
               </Button>
             </div>
           </div>

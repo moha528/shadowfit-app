@@ -70,17 +70,17 @@ export function ExerciseGrid({
             <Dumbbell className="h-10 w-10 text-zinc-600" />
           </div>
           <h3 className="text-2xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-400">
-            Aucun exercice trouvé
+            No exercises found
           </h3>
           <p className="text-zinc-400 max-w-md mb-8">
-            Essayez de modifier vos critères de recherche ou sélectionnez une autre catégorie d&apos;exercices.
+            Try modifying your search criteria or select another category of exercises.
           </p>
           <Button
             variant="outline"
             className="border-zinc-800/50 hover:bg-zinc-800/80 shadow-lg shadow-black/20 bg-gradient-to-br from-zinc-800/50 to-zinc-900/50"
             onClick={resetFilters}
           >
-            Réinitialiser les filtres
+            Reset filters
           </Button>
         </div>
       )}

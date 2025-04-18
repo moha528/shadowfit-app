@@ -35,7 +35,7 @@ export default function WhyUsSection() {
                                 <div
                                     className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/90 z-0"></div>
 
-                                <div className="absolute bottom-0 left-0 right-0 p-10 text-white z-20">
+                                <div className=" hidden lg:block absolute bottom-0 left-0 right-0 p-10 text-white z-20">
                                     <div
                                         className="quote-container backdrop-blur-sm bg-black/20 p-6 rounded-xl border border-white/10 shadow-glow transition-all duration-500">
                                         <h3 className="text-3xl font-bold mb-4">Become your own rival</h3>

@@ -35,7 +35,7 @@ export default function GenderSelectionStep({
                 {/* Main image section */}
                 <div className="relative w-full lg:w-1/2 h-[40vh] lg:h-full overflow-hidden">
                     <motion.div
-                        className="absolute rounded-tr-[40px] rounded-br-[40px] inset-0 bg-cover bg-center"
+                        className="absolute lg:rounded-tr-[40px] lg:rounded-br-[40px] inset-0 bg-cover bg-center"
                         style={{ backgroundImage: 'url("/auth/gender_selection.png")' }}
                         initial={{ scale: 1.1, opacity: 0.8 }}
                         animate={{ scale: 1, opacity: 1 }}

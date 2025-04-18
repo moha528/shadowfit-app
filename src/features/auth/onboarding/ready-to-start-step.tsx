@@ -105,7 +105,7 @@ export default function ReadyToStartStep({
                 {/* Image section */}
                 <div className="relative w-full lg:w-1/2 h-[40vh] lg:h-full overflow-hidden order-1 lg:order-2">
                     <motion.div
-                        className="absolute rounded-tl-[40px] rounded-bl-[40px] inset-0 bg-cover bg-center"
+                        className="absolute lg:rounded-tl-[40px] lg:rounded-bl-[40px] inset-0 bg-cover bg-center"
                         style={{
                             backgroundImage:
                                 gender === "female" ? 'url("/auth/female_altere.png")' : 'url("/auth/male_altere.png")',
@@ -125,7 +125,7 @@ export default function ReadyToStartStep({
                         variants={contentVariants}
                         custom={1}
                     >
-                        <div className="backdrop-blur-sm bg-black/30 p-6 rounded-xl border border-white/10 shadow-glow">
+                        <div className="hidden lg:block backdrop-blur-sm bg-black/30 p-6 rounded-xl border border-white/10 shadow-glow">
                             <div className="flex items-center gap-3 mb-3">
                                 <div className="h-3 w-3 bg-green-500 rounded-full animate-pulse"></div>
                                 <h3 className="text-xl font-semibold text-white">Ready to Transform</h3>

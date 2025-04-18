@@ -166,8 +166,8 @@ export function MainNav({ user }: { user: User }) {
               })}
               <DropdownMenuSeparator className="bg-zinc-800" />
               <DropdownMenuItem className="hover:bg-zinc-800 focus:bg-zinc-800 cursor-pointer">
-                <Link href="/account" className="flex w-full">
-                  Account
+                <Link href="/space" className="flex w-full">
+                  My Space
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator className="bg-zinc-800" />

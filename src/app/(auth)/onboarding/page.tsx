@@ -86,7 +86,7 @@ export default function OnboardingPage() {
             <div className="fixed inset-0 grid-pattern opacity-10 z-0"></div>
 
             {/* Logo */}
-            <div className="absolute top-6 left-3/4 animate-float z-50">
+            <div className=" hidden lg:block absolute top-6 left-3/4 animate-float z-50">
                 <div className="backdrop-blur-md bg-white/10 px-4 py-2 rounded-full border border-white/20 shadow-glow flex items-center">
                     <Dumbbell className="h-4 w-4 mr-2 text-gray-300" />
                     <span className="text-white font-medium">ShadowFit</span>

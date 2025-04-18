@@ -26,9 +26,9 @@ export const auth = betterAuth({
         },
         sendResetPassword: async ({user, url}) => {
             await resend.emails.send({
-                from: 'Acme <onboarding@resend.dev>',
+                from: 'no-reply@shadowfit-app.space',
                 to: user.email,
-                subject: "Réinitialisation du mot de passe",
+                subject: "Password Reset",
                 react: await ResetPasswordEmailTemplate({firstName: user.name, resetLink: url}),
             });
         }
@@ -47,7 +47,7 @@ export const auth = betterAuth({
         }
     },
     cookieOptions: {
-        secure: process.env.NODE_ENV === "production", // HTTPS en production
+        secure: process.env.NODE_ENV === "production", // HTTPS in production
         sameSite: "lax",
     },
     plugins: [
@@ -58,24 +58,24 @@ export const auth = betterAuth({
                     let text = "";
 
                     if (type === "email-verification") {
-                        subject = "Vérification de votre email";
-                        text = `Votre code de vérification est : ${otp}`;
+                        subject = "Email Verification";
+                        text = `Your verification code is: ${otp}`;
                     } else if (type === "forget-password") {
-                        subject = "Réinitialisation de mot de passe";
-                        text = `Votre code OTP pour réinitialiser votre mot de passe est : ${otp}`;
+                        subject = "Password Reset";
+                        text = `Your OTP for resetting your password is: ${otp}`;
                     } else {
-                        subject = "Code de sécurité";
-                        text = `Votre code de sécurité est : ${otp}`;
+                        subject = "Security Code";
+                        text = `Your security code is: ${otp}`;
                     }
 
                     await resend.emails.send({
-                        from: 'Acme <onboarding@resend.dev>',
+                        from: 'no-reply@shadowfit-app.space',
                         to: email,
                         subject: subject,
                         react: await OtpEmailTemplate({firstName: email, otp: otp, type: type}),
                     });
                 } catch (error) {
-                    console.error("Erreur lors de l'envoi de l'OTP:", error);
+                    console.error("Error sending OTP:", error);
                     throw new Error("Failed to send OTP");
                 }
             },
