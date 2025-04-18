@@ -53,8 +53,8 @@ export default function NotFoundPage() {
               </span>
             </div>
 
-            <h1 className="text-3xl font-bold mb-2 text-center">Page introuvable</h1>
-            <p className="text-zinc-400 text-center">La page que vous recherchez n&apos;existe pas ou a été déplacée</p>
+            <h1 className="text-3xl font-bold mb-2 text-center">Page not found</h1>
+            <p className="text-zinc-400 text-center">The page you are looking for does not exist or has been moved</p>
           </div>
 
           {/* Mobile only 404 */}
@@ -64,14 +64,14 @@ export default function NotFoundPage() {
 
           <div className="space-y-6">
             <div className="text-zinc-400 text-center">
-              <p>Nous ne trouvons pas la page que vous recherchez.</p>
-              <p>Vérifiez l&apos;URL ou retournez à l&apos;accueil.</p>
+              <p>We cannot find the page you are looking for.</p>
+              <p>Check the URL or return to the home page.</p>
             </div>
 
             <div className="pt-4">
               <Button className="w-full h-12 bg-gray-800 hover:bg-gray-700 text-white group" asChild>
                 <Link href="/">
-                  Retour à l&apos;accueil
+                  Return to home
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>

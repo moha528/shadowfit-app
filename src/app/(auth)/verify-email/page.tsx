@@ -137,7 +137,7 @@ function VerifyEmailContent() {
                         description: "A new code has been sent to your email address.",
                         duration: 5000,
                     })
-                  redirect("/verify-email?email=" + email + "&type=email-verification" + "&message=Un email de vérification a été envoyé à votre adresse. Veuillez vérifier votre boîte de réception." + "&error=" + "Un nouveau code a été envoyé à votre adresse email." + "&success=" + "Un nouveau code a été envoyé à votre adresse email." + "&info=" + "Un nouveau code a été envoyé à votre adresse email." + "&warning=" + "Un nouveau code a été envoyé à votre adresse email." + "&alert=" + "Un nouveau code a été envoyé à votre adresse email." + "&notification=" + "Un nouveau code a été envoyé à votre adresse email." + "&toast=" + "Un nouveau code a été envoyé à votre adresse email.");
+                  redirect("/verify-email?email=" + email + "&type=email-verification" + "&message=A verification email has been sent to your address. Please check your inbox." + "&error=" + "A new code has been sent to your email address." + "&success=" + "A new code has been sent to your email address." + "&info=" + "A new code has been sent to your email address." + "&warning=" + "A new code has been sent to your email address." + "&alert=" + "A new code has been sent to your email address." + "&notification=" + "A new code has been sent to your email address." + "&toast=" + "A new code has been sent to your email address.");
                 },
                 onError: (ctx) => {
                     toast.dismiss(loadingToastId)
@@ -155,7 +155,7 @@ function VerifyEmailContent() {
 
     return (
         <div className="login-container flex min-h-screen bg-black overflow-hidden">
-            {/* Partie image (côté droit) */}
+            {/* Image section (right side) */}
             <SideImageForm
                 backgroundImage={'url("/auth/verify-email.png")'}
                 motivationalQuotes={motivationalQuotes}
@@ -163,7 +163,7 @@ function VerifyEmailContent() {
                 setCurrentQuote={setCurrentQuote}
             />
 
-            {/* Formulaire (côté gauche) */}
+            {/* Form (left side) */}
             <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
                 <div className="max-w-md w-full">
                     <div className="flex flex-col items-center mb-10 transition-all duration-300">

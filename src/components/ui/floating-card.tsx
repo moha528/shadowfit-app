@@ -13,7 +13,6 @@ interface FloatingCardProps {
     delay: number
 }
 
-// Modifier la taille des cartes pour qu'elles soient plus petites et s'adaptent mieux
 const FloatingCard: React.FC<FloatingCardProps> = ({ title, description, icon, initialPosition, delay }) => {
     const [position, setPosition] = useState(initialPosition)
     const direction = useRef({ x: Math.random() > 0.5 ? 1 : -1, y: Math.random() > 0.5 ? 1 : -1 })
@@ -71,71 +70,71 @@ export function FloatingCards() {
     return (
         <div className="relative w-full h-full">
             <FloatingCard
-                title="Force & Puissance"
-                description="Programmes spécialisés pour développer votre force maximale"
+                title="Strength & Power"
+                description="Specialized programs to develop your maximum strength"
                 icon={<Dumbbell size={16} />}
                 initialPosition={{ x: 150, y: 800 }}
                 delay={0}
             />
             <FloatingCard
                 title="Cardio & Endurance"
-                description="Améliorez votre capacité cardiovasculaire et votre endurance"
+                description="Improve your cardiovascular capacity and endurance"
                 icon={<Heart size={16} />}
                 initialPosition={{ x: 500, y: 950 }}
                 delay={500}
             />
             <FloatingCard
-                title="Nutrition Optimale"
-                description="Plans nutritionnels adaptés à vos objectifs spécifiques"
+                title="Optimal Nutrition"
+                description="Nutritional plans tailored to your specific goals"
                 icon={<Zap size={16} />}
                 initialPosition={{ x: 500, y: 800 }}
                 delay={1000}
             />
             <FloatingCard
-                title="Compétition"
-                description="Préparation spécifique pour les athlètes de compétition"
+                title="Competition"
+                description="Specific preparation for competitive athletes"
                 icon={<Trophy size={16} />}
                 initialPosition={{ x: 120, y: 20 }}
                 delay={1500}
             />
             <FloatingCard
-                title="Récupération"
-                description="Techniques avancées pour optimiser votre récupération"
+                title="Recovery"
+                description="Advanced techniques to optimize your recovery"
                 icon={<RefreshCw size={16} />}
                 initialPosition={{ x: 300, y: 200 }}
                 delay={2000}
             />
             <FloatingCard
-                title="Suivi Personnalisé"
-                description="Coaching individuel adapté à votre niveau et vos objectifs"
+                title="Personal Tracking"
+                description="Individual coaching adapted to your level and goals"
                 icon={<UserCheck size={16} />}
                 initialPosition={{ x: 800, y: 150 }}
                 delay={2500}
             />
             <FloatingCard
-                title="Musculation"
-                description="Programmes d'hypertrophie pour développer votre masse musculaire"
+                title="Bodybuilding"
+                description="Hypertrophy programs to develop your muscle mass"
                 icon={<Dumbbell size={16} />}
                 initialPosition={{ x: 50, y: 950 }}
                 delay={3000}
             />
             <FloatingCard
-                title="Perte de Poids"
-                description="Stratégies efficaces pour brûler les graisses et affiner votre silhouette"
+                title="Weight Loss"
+                description="Effective strategies to burn fat and refine your silhouette"
                 icon={<Scale size={16} />}
                 initialPosition={{ x: 0, y: 150 }}
                 delay={3500}
             />
             <FloatingCard
-                title="Mobilité"
-                description="Exercices pour améliorer votre souplesse et prévenir les blessures"
+                title="Mobility"
+                description="Exercises to improve your flexibility and prevent injuries"
                 icon={<Move size={16} />}
                 initialPosition={{ x: 700, y: 750 }}
                 delay={4000}
             />
             <FloatingCard
-                title="Communauté"
-                description="Rejoignez des milliers de sportifs et partagez votre progression"
+                title="Community"
+                description="Join thousands of athletes and share your progress"
                 icon={<Users size={16} />}
                 initialPosition={{ x: 180, y: 350 }}
                 delay={4500}
