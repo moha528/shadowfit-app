@@ -1,16 +1,13 @@
-// lib/services/Training.service.ts
+import { ExerciseRepository } from "@/repository/exercice.repository";
+import { Exercise, Gender } from "@prisma/client";
+import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
+import { UserRepository } from "@/repository/user.repository";
+import { TrainingSessionRepository } from "@/repository/training-session.repository";
 
+export class TrainingService {
 
-import {ExerciseRepository} from "@/repository/exercice.repository";
-import {Exercise, Gender} from "@prisma/client";
-import {headers} from "next/headers";
-import {auth} from "@/lib/auth";
-import {UserRepository} from "@/repository/user.repository";
-import {TrainingSessionRepository} from "@/repository/training-session.repository";
-
-export const TrainingService = {
-
-    async getTrainingExercisesByType(){
+    static async getTrainingExercisesByType() {
         const headersValue = await headers()
         const session = await auth.api.getSession({ headers: headersValue })
 
@@ -20,40 +17,41 @@ export const TrainingService = {
         const user = await UserRepository.getUserById(session.user.id)
 
 
-        return await  ExerciseRepository.getExercisesByType(user ? user.gender : Gender.BOTH)
+        return await ExerciseRepository.getExercisesByType(user ? user.gender : Gender.BOTH)
 
-    },
- async getTrainingExercises(){
-     const headersValue = await headers()
-     const session = await auth.api.getSession({ headers: headersValue })
+    }
+    
+    static async getTrainingExercises() {
+        const headersValue = await headers()
+        const session = await auth.api.getSession({ headers: headersValue })
 
-     if (!session?.user) {
-         return []
-     }
+        if (!session?.user) {
+            return []
+        }
 
-     return await  ExerciseRepository.getAllExercises()
- },
+        return await ExerciseRepository.getAllExercises()
+    }
 
- async createTrainingExercises(data: {
-     intensity: number;
-     muscleGroups: ("PECTORALS" | "BICEPS" | "TRICEPS" | "ABDOMINALS" | "LEGS" | "BACK" | "SHOULDERS" | "CALVES")[];
-     image: string;
-     name: string;
-     description: string;
-     type: "MALE" | "FEMALE" | "BOTH";
- }){
-     const headersValue = await headers()
-     const session = await auth.api.getSession({ headers: headersValue })
+    static async createTrainingExercises(data: {
+        intensity: number;
+        muscleGroups: ("PECTORALS" | "BICEPS" | "TRICEPS" | "ABDOMINALS" | "LEGS" | "BACK" | "SHOULDERS" | "CALVES")[];
+        image: string;
+        name: string;
+        description: string;
+        type: "MALE" | "FEMALE" | "BOTH";
+    }) {
+        const headersValue = await headers()
+        const session = await auth.api.getSession({ headers: headersValue })
 
-     if (!session?.user ) {
-         return { error: "User not found" }
-     }
+        if (!session?.user) {
+            return { error: "User not found" }
+        }
 
-     return await ExerciseRepository.createExercise(data)
+        return await ExerciseRepository.createExercise(data)
 
- },
+    }
 
-    async updateExercise(id: string, data: Partial<Exercise>) {
+    static async updateExercise(id: string, data: Partial<Exercise>) {
         const headersValue = await headers()
         const session = await auth.api.getSession({ headers: headersValue })
 
@@ -62,9 +60,9 @@ export const TrainingService = {
         }
 
         return await ExerciseRepository.updateExercise(id, data)
-    },
+    }
 
-    async deleteExercise(id: string) {
+    static async deleteExercise(id: string) {
         const headersValue = await headers()
         const session = await auth.api.getSession({ headers: headersValue })
 
@@ -73,9 +71,9 @@ export const TrainingService = {
         }
 
         return await ExerciseRepository.deleteExercise(id)
-    },
+    }
 
-    async createTrainingSessionExercises(data: {
+    static async createTrainingSessionExercises(data: {
         notes?: string
         exerciseIds: string[]
     }) {
@@ -86,9 +84,10 @@ export const TrainingService = {
             return { error: "User not found" }
         }
 
-        return await TrainingSessionRepository.createTrainingSession(session.user.id,data)
-    },
-    async updateTrainingSessionExercises(data: {
+        return await TrainingSessionRepository.createTrainingSession(session.user.id, data)
+    }
+
+    static async updateTrainingSessionExercises(data: {
         id: string
         notes?: string
         exerciseIds: string[]
@@ -101,9 +100,9 @@ export const TrainingService = {
         }
 
         return await TrainingSessionRepository.updateTrainingSession(data)
-    },
+    }
 
-    async deleteTrainingSession(id: string) {
+    static async deleteTrainingSession(id: string) {
         const headersValue = await headers()
         const session = await auth.api.getSession({ headers: headersValue })
 
@@ -112,9 +111,9 @@ export const TrainingService = {
         }
 
         return await TrainingSessionRepository.deleteTrainingSession(id)
-    },
+    }
 
-    async getTrainingSessions() {
+    static async getTrainingSessions() {
         const headersValue = await headers()
         const session = await auth.api.getSession({ headers: headersValue })
 
@@ -123,9 +122,9 @@ export const TrainingService = {
         }
 
         return TrainingSessionRepository.getTrainingSessions();
-    },
+    }
 
-    async getTrainingSessionByCurrentUser() {
+    static async getTrainingSessionByCurrentUser() {
         const headersValue = await headers()
         const session = await auth.api.getSession({ headers: headersValue })
 
@@ -134,8 +133,6 @@ export const TrainingService = {
         }
 
         return TrainingSessionRepository.getTrainingSessionsByUserId(session.user.id);
-    },
-
-
+    }
 
 }

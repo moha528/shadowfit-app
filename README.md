@@ -97,6 +97,24 @@ npx prisma db push
 npm run dev
 ```
 
+## 🎮 Démo
+
+L'application inclut deux comptes de démonstration :
+
+### Compte Administrateur
+- **Email**: demo@gmail.com
+- **Mot de passe**: demo123
+- **Rôle**: ADMIN
+- **Statut**: Email vérifié et profil complété
+
+### Compte Utilisateur
+- **Email**: user@example.com
+- **Mot de passe**: user123
+- **Rôle**: USER
+- **Statut**: Email vérifié et profil complété
+
+> Note: Les mots de passe sont stockés de manière sécurisée avec bcryptjs (salt: 10)
+
 ## 📊 Tests
 
 - Unit tests: `npm run test:unit`

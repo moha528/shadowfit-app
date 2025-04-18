@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import * as z from "zod"
+import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -52,7 +52,7 @@ export function UserForm({ user }: UserFormProps) {
       name: user.name,
       email: user.email,
       role: user.role,
-      gender: user.gender,
+      gender: user.gender as "MALE" | "FEMALE",
     },
   })
 

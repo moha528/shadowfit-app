@@ -1,10 +1,8 @@
-// lib/repositories/Exercise.repository.ts
 import prisma from "@/lib/prisma"
 
+export class TrainingSessionRepository {
 
-export const TrainingSessionRepository = {
-
-    async createTrainingSession(userId:string,data: {
+    static async createTrainingSession(userId: string, data: {
         notes?: string
         exerciseIds: string[]
 
@@ -14,7 +12,7 @@ export const TrainingSessionRepository = {
                 notes: data.notes,
                 date: new Date(),
                 exercises: {
-                    connect: data.exerciseIds.map((id) => ({id})),
+                    connect: data.exerciseIds.map((id) => ({ id })),
                 },
                 user: {
                     connect: {
@@ -26,9 +24,9 @@ export const TrainingSessionRepository = {
                 exercises: true, // ✅ pour retourner les exos liés
             },
         });
-    },
+    }
 
-    async updateTrainingSession(data: {
+    static async updateTrainingSession(data: {
         id: string
         notes?: string
         exerciseIds: string[]
@@ -38,46 +36,45 @@ export const TrainingSessionRepository = {
             data: {
                 notes: data.notes,
                 exercises: {
-                    set: data.exerciseIds.map((id) => ({id})),
+                    set: data.exerciseIds.map((id) => ({ id })),
                 },
             },
             include: {
                 exercises: true, // ✅ pour retourner les exos liés
             },
         });
-    },
+    }
 
-    async deleteTrainingSession(id: string) {
+    static async deleteTrainingSession(id: string) {
         return prisma.trainingSession.delete({
             where: { id },
         });
-    },
+    }
 
-    async getTrainingSessions() {
+    static async getTrainingSessions() {
         return prisma.trainingSession.findMany({
             include: {
                 exercises: true,
             },
         });
-    },
+    }
 
-    async getTrainingSessionById(id: string) {
+    static async getTrainingSessionById(id: string) {
         return prisma.trainingSession.findUnique({
             where: { id },
             include: {
                 exercises: true,
             },
         });
-    },
+    }
 
-    async getTrainingSessionsByUserId(userId: string) {
+    static async getTrainingSessionsByUserId(userId: string) {
         return prisma.trainingSession.findMany({
             where: { userId },
             include: {
                 exercises: true,
             },
         });
-    },
-
+    }
 
 }

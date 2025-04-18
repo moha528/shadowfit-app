@@ -2,7 +2,6 @@
 "use client"
 
 import { useState, Suspense } from "react"
-import { z } from "zod"
 import { Dumbbell } from "lucide-react"
 import SideImageForm from "@/features/auth/side-image-form"
 import { AuthForm } from "@/features/auth/auth-form"
@@ -10,22 +9,7 @@ import { toastAlert } from "@/components/ui/sonner-v2"
 import {redirect, useSearchParams} from "next/navigation"
 import { authClient } from "@/lib/authClient"
 import { toast } from "sonner"
-
-// Schéma Zod pour la réinitialisation de mot de passe
-const resetPasswordSchema = z.object({
-    password: z.string()
-        .min(8, { message: "Password must contain at least 8 characters" })
-        .regex(/[A-Z]/, { message: "Must contain at least one uppercase letter" })
-        .regex(/[a-z]/, { message: "Must contain at least one lowercase letter" })
-        .regex(/[0-9]/, { message: "Must contain at least one number" })
-        .regex(/[^A-Za-z0-9]/, { message: "Must contain at least one special character" }),
-    confirmPassword: z.string()
-}).refine(data => data.password === data.confirmPassword, {
-    message: "Passwords do not match",
-    path: ["confirmPassword"]
-})
-
-type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>
+import { ResetPasswordFormValues, resetPasswordSchema } from "@/schemas/auth.schema"
 
 export default function ResetPasswordPage() {
     return (

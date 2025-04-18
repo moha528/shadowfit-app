@@ -5,23 +5,9 @@ import { UserService } from "@/services/user.service"
 import { headers } from "next/headers"
 import { auth } from "@/lib/auth"
 import { revalidatePath } from "next/cache"
-import { z } from "zod"
 import { UserRepository } from "@/repository/user.repository"
 import { User } from "@prisma/client"
-
-const filterSchema = z.object({
-    role: z.array(z.string()).optional(),
-    gender: z.array(z.string()).optional(),
-    profileCompleted: z.array(z.string()).optional(),
-})
-
-const paramsSchema = z.object({
-    page: z.number().int().positive().default(1),
-    perPage: z.number().int().positive().default(10),
-    sort: z.string().optional(),
-    search: z.string().optional(),
-    filters: filterSchema.optional(),
-})
+import { ParamsSchemaFormValues } from "@/schemas/index.schema"
 
 export async function updatePassword(data: PasswordFormData) {
     const headersValue = await headers()
@@ -47,7 +33,7 @@ export async function updateProfile(data: ProfileFormData) {
     return result
 }
 
-export async function getUsersWithPagination(params: z.infer<typeof paramsSchema>) {
+export async function getUsersWithPagination(params: ParamsSchemaFormValues) {
     const headersValue = await headers()
     const session = await auth.api.getSession({ headers: headersValue })
 

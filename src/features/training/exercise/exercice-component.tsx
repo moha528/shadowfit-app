@@ -1,4 +1,3 @@
-// ExerciseForm.tsx
 "use client"
 
 import { useState } from "react"
@@ -9,22 +8,13 @@ import {createExercisesAction} from "@/actions/training.action";
 import {useEdgeStore} from "@/lib/edgestore";
 import {toast} from "sonner";
 import {Progress} from "@/components/ui/progress";
-import {exerciseFields, ExerciseFormValues, exerciseSchema} from "@/features/training/field-schema-form";
-
-// Enum for gender types
-
-
-// Enum for muscle groups
-
-
-
+import {exerciseFields} from "@/features/training/field-schema-form";
+import { ExerciseFormValues, exerciseSchema } from "@/schemas/training.schema"
 
 export default function ExerciseFormPage() {
     const [isLoading, setIsLoading] = useState(false)
     const { edgestore } = useEdgeStore();
     const [uploadProgress, setUploadProgress] = useState(0)
-
-    // F
 
     const handleSubmit = async (values: ExerciseFormValues) => {
         setIsLoading(true)
@@ -122,13 +112,12 @@ export default function ExerciseFormPage() {
                             <div className="p-8">
                                 <CrudForm
                                     schema={exerciseSchema}
-                                    fields={exerciseFields}
+                                    fields={exerciseFields as any}
                                     mode="create"
                                     isLoading={isLoading}
                                     onSubmit={handleSubmit}
                                     title=""
                                     subtitle=""
-                                    submitButtonText="Create Exercise"
                                     className="space-y-6"
                                 />
                                 {uploadProgress > 0 && uploadProgress < 100 && (

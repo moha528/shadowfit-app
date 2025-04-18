@@ -2,25 +2,12 @@ import { PasswordFormData, ProfileFormData } from "@/features/space/profile/type
 import { AccountRepository } from "@/repository/account.repository"
 import { UserRepository } from "@/repository/user.repository"
 import bcrypt from "bcryptjs"
-import { z } from "zod"
 import { User } from "@prisma/client"
+import { paramsSchema, ParamsSchemaFormValues } from "@/schemas/index.schema"
 
-const filterSchema = z.object({
-    role: z.array(z.string()).optional(),
-    gender: z.array(z.string()).optional(),
-    profileCompleted: z.array(z.string()).optional(),
-})
+export class UserService {
 
-const paramsSchema = z.object({
-    page: z.number().int().positive().default(1),
-    perPage: z.number().int().positive().default(10),
-    sort: z.string().optional(),
-    search: z.string().optional(),
-    filters: filterSchema.optional(),
-})
-
-export const UserService = {
-    async updatePassword(userId: string, data: PasswordFormData) {
+    static async updatePassword(userId: string, data: PasswordFormData) {
         const account = await AccountRepository.findAccountByUserId(userId)
 
         if (!account) {
@@ -46,9 +33,9 @@ export const UserService = {
         }
 
         return { success: true, message: "Password updated successfully !" }
-    },
+    }
 
-    async updateProfile(userId: string, data: ProfileFormData) {
+    static async updateProfile(userId: string, data: ProfileFormData) {
         const result = await UserRepository.updateUser(userId, {
             name: data.name,
             goals: data.goals,
@@ -60,14 +47,14 @@ export const UserService = {
         }
 
         return { success: true, message: "Profile updated successfully !" }
-    },
+    }
 
-    async getUsersWithPagination(params: z.infer<typeof paramsSchema>) {
+    static async getUsersWithPagination(params: ParamsSchemaFormValues) {
         try {
             const validatedParams = paramsSchema.parse(params)
-            
+
             const result = await UserRepository.getUsersWithPagination(validatedParams)
-            
+
             return {
                 success: true,
                 data: result
@@ -79,9 +66,9 @@ export const UserService = {
                 error: "Failed to fetch users"
             }
         }
-    },
+    }
 
-    async deleteUser(userId: string) {
+    static async deleteUser(userId: string) {
         try {
             const result = await UserRepository.deleteUser(userId)
             return {
@@ -95,9 +82,9 @@ export const UserService = {
                 error: "Failed to delete user"
             }
         }
-    },
+    }
 
-    async updateUser(userId: string, data: Partial<User>) {
+    static async updateUser(userId: string, data: Partial<User>) {
         try {
             const result = await UserRepository.updateUser(userId, data)
             return {

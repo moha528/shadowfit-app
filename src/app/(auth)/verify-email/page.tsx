@@ -2,7 +2,6 @@
 "use client"
 
 import { useState, Suspense } from "react"
-import { z } from "zod"
 import { Dumbbell } from "lucide-react"
 import SideImageForm from "@/features/auth/side-image-form"
 import { AuthForm } from "@/features/auth/auth-form"
@@ -11,15 +10,7 @@ import {redirect, useSearchParams} from "next/navigation"
 import { authClient } from "@/lib/authClient"
 import { toast } from "sonner"
 import {verifiedEmailAction} from "@/actions/auth.action";
-
-// Schéma Zod pour la validation OTP
-const verifyEmailSchema = z.object({
-    otp: z.string()
-        .length(6, { message: "The code must contain exactly 6 characters" })
-        .regex(/^[0-9]+$/, { message: "The code must contain only numbers" })
-})
-
-type VerifyEmailFormValues = z.infer<typeof verifyEmailSchema>
+import { VerifyEmailFormValues, verifyEmailSchema } from "@/schemas/auth.schema"
 
 function VerifyEmailContent() {
     const [isLoading, setIsLoading] = useState(false)

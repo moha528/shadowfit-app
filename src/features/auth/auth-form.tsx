@@ -1,4 +1,3 @@
-// AuthForm.tsx
 "use client"
 
 import React from "react"
@@ -15,7 +14,6 @@ import {CustomFormText} from "@/components/input-component/text-input"
 import {CustomFormOtp} from "@/components/input-component/otp-input";
 import {authClient} from "@/lib/authClient";
 
-// Type utilitaire
 type InferFormValues<T extends ZodType<any, any, any>> = z.infer<T>
 
 interface FieldConfig<T extends FieldValues> {

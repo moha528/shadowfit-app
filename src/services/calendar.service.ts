@@ -2,23 +2,6 @@ import { CalendarRepository } from '@/repository/calendar.repository';
 import { startOfMonth, endOfMonth, eachDayOfInterval } from 'date-fns';
 import { DayOfWeek } from '@prisma/client';
 
-export interface CalendarDay {
-    date: Date;
-    isCurrentMonth: boolean;
-    programDay?: {
-        dayOfWeek: DayOfWeek;
-        muscleTargets: string[];
-    };
-    trainingSession?: {
-        id: string;
-        exercises: {
-            id: string;
-            name: string;
-            muscleGroups: string[];
-        }[];
-    };
-}
-
 export class CalendarService {
     static async getCalendarData(userId: string, month: Date) {
         const startDate = startOfMonth(month);

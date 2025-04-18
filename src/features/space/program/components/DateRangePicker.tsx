@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { ProgramFormValues } from "../types/program.types"
+import { ProgramFormValues } from "@/schemas/space.schema"
 
 interface DateRangePickerProps {
     control: Control<ProgramFormValues>

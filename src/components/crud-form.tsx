@@ -1,4 +1,3 @@
-// CrudForm.tsx
 "use client"
 
 import React, { useState } from "react"
@@ -19,9 +18,9 @@ import { CustomFormFileUpload } from "@/components/input-component/file-input"
 import { CustomFormDatePicker } from "@/components/input-component/date-input"
 import { CustomFormNumberInput } from "@/components/input-component/number-input"
 import { CustomFormSlider } from "@/components/input-component/slide-input"
-import {CustomFormMultiSelect} from "@/components/input-component/multi-select-input";
+import { CustomFormMultiSelect } from "@/components/input-component/multi-select-input";
+import { cn } from "@/lib/utils"
 
-// Type utilitaire
 type InferFormValues<T extends ZodType<any, any, any>> = z.infer<T>
 
 interface FieldOption {
@@ -52,19 +51,21 @@ interface CrudFormProps<T extends ZodType<any, any, any>> {
     onCancel?: () => void
     title?: string
     subtitle?: string
+    className?: string
 }
 
 export function CrudForm<T extends ZodType<any, any, any>>({
-                                                               schema,
-                                                               fields,
-                                                               mode,
-                                                               initialData,
-                                                               isLoading = false,
-                                                               onSubmit,
-                                                               onCancel,
-                                                               title,
-                                                               subtitle,
-                                                           }: CrudFormProps<T>) {
+    schema,
+    fields,
+    mode,
+    initialData,
+    isLoading = false,
+    onSubmit,
+    onCancel,
+    title,
+    subtitle,
+    className,
+}: CrudFormProps<T>) {
     type FormValues = InferFormValues<T>
 
     const [formMode, setFormMode] = useState<"create" | "edit" | "view" | "delete">(mode)
@@ -74,7 +75,6 @@ export function CrudForm<T extends ZodType<any, any, any>>({
         defaultValues: initialData || fields.reduce((acc, field) => {
             let defaultValue: any = ""
 
-            // Set appropriate default values based on field type
             if (field.type === "checkbox") defaultValue = false
             else if (field.type === "number") defaultValue = field.min || 0
             else if (field.type === "slide") defaultValue = field.min || 0
@@ -175,9 +175,8 @@ export function CrudForm<T extends ZodType<any, any, any>>({
         setFormMode("edit")
     }
 
-    // Dans le CrudForm.tsx, modifiez la partie du return :
     return (
-        <div className={`w-full mx-auto `}> {/* Ajout de la prop className */}
+        <div className={cn("w-full mx-auto", className)}>
             {title && (
                 <div className="mb-4">
                     <h2 className="text-lg font-semibold text-white">{title}</h2>

@@ -10,7 +10,6 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { cn } from "@/lib/utils"
 import { ChevronDown } from "lucide-react"
 import { MuscleGroup } from "@prisma/client"
-import { ProgramFormValues } from "../types/program.types"
 
 interface MuscleGroupSelectorProps {
     index: number

@@ -1,9 +1,6 @@
-// LoginPage.tsx
 "use client"
 
 import { useState } from "react"
-
-import { z } from "zod"
 import { Dumbbell } from "lucide-react"
 import SideImageForm from "@/features/auth/side-image-form"
 import { AuthForm } from "@/features/auth/auth-form"
@@ -12,15 +9,7 @@ import {authClient} from "@/lib/authClient";
 import {toast} from "sonner";
 import {verifyEmailAction} from "@/actions/auth.action";
 import {redirect} from "next/navigation";
-
-// Schéma Zod pour le formulaire de connexion
-const loginSchema = z.object({
-  email: z.string().email({ message: "Invalid email address" }),
-  password: z.string().min(6, { message: "Password must contain at least 6 characters" }),
-})
-
-// Type déduit du schéma
-type LoginFormValues = z.infer<typeof loginSchema>
+import { LoginFormValues, loginSchema } from "@/schemas/auth.schema"
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
@@ -50,7 +39,6 @@ export default function LoginPage() {
     },
   ]
 
-  // Configuration des champs du formulaire avec typage strict
   const loginFields: Array<{
     type: "email" | "password"
     name: keyof LoginFormValues

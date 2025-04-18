@@ -1,8 +1,6 @@
-// ForgotPasswordPage.tsx
 "use client"
 
 import { useState } from "react"
-import { z } from "zod"
 import { Dumbbell } from "lucide-react"
 import SideImageForm from "@/features/auth/side-image-form"
 import { AuthForm } from "@/features/auth/auth-form"
@@ -10,18 +8,11 @@ import { toastAlert } from "@/components/ui/sonner-v2"
 import { toast } from "sonner"
 import {authClient} from "@/lib/authClient";
 import {verifyEmailAction} from "@/actions/auth.action";
-
-// Schéma Zod pour le formulaire de réinitialisation de mot de passe
-const forgotPasswordSchema = z.object({
-  email: z.string().email({ message: "Invalid email address" }),
-})
-
-// Type déduit du schéma
-type ForgotPasswordFormValues = z.infer<typeof forgotPasswordSchema>
+import { ForgotPasswordFormValues, forgotPasswordSchema } from "@/schemas/user.schema"
 
 export default function ForgotPasswordPage() {
   const [isLoading, setIsLoading] = useState(false)
-  const [currentQuote] = useState(0)
+  const [currentQuote, setCurrentQuote] = useState(0)
 
   const motivationalQuotes = [
     {
@@ -119,6 +110,7 @@ export default function ForgotPasswordPage() {
             backgroundImage={'url("/auth/forgot-password.png")'}
             motivationalQuotes={motivationalQuotes}
             currentQuote={currentQuote}
+            setCurrentQuote={setCurrentQuote}
         />
 
         {/* Formulaire (côté gauche) */}

@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { toast } from "sonner"
 import { createProgram, checkExistingProgram } from "@/actions/program.actions"
-import { programFormSchema, ProgramFormValues } from "../types/program.types"
+import { programFormSchema, ProgramFormValues } from "@/schemas/space.schema"
 import { MuscleGroup, DayOfWeek } from "@prisma/client"
 
 export const useProgramForm = (userId: string) => {

@@ -2,7 +2,6 @@
 "use client"
 
 import { useState } from "react"
-import { z } from "zod"
 import { Dumbbell } from "lucide-react"
 import SideImageForm from "@/features/auth/side-image-form"
 import { AuthForm } from "@/features/auth/auth-form"
@@ -10,16 +9,7 @@ import {authClient} from "@/lib/authClient";
 import {toastAlert} from "@/components/ui/sonner-v2";
 import {toast} from "sonner";
 import {redirect} from "next/navigation";
-
-// Schéma Zod pour le formulaire d'inscription
-const registerSchema = z.object({
-  fullName: z.string().min(2, { message: "Name must contain at least 2 characters" }),
-  email: z.string().email({ message: "Invalid email address" }),
-  password: z.string().min(6, { message: "Password must contain at least 6 characters" }),
-})
-
-// Type inféré à partir du schéma Zod
-type RegisterFormValues = z.infer<typeof registerSchema>
+import { RegisterFormValues, registerSchema } from "@/schemas/auth.schema"
 
 export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false)

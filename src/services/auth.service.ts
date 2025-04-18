@@ -3,8 +3,8 @@ import { auth } from "@/lib/auth"
 import { UserRepository } from "@/repository/user.repository";
 import { Gender } from "@prisma/client";
 
-export const AuthService = {
-    async updateEmailVerified(email: string) {
+export class AuthService {
+    static async updateEmailVerified(email: string) {
         const headersValue = await headers()
         const session = await auth.api.getSession({ headers: headersValue })
 
@@ -15,25 +15,25 @@ export const AuthService = {
         return await UserRepository.updateUser(session.user.id, {
             emailVerified: true,
         })
-    },
+    }
 
-    async verifyEmail(email: string) {
+    static async verifyEmail(email: string) {
 
 
         const user = await UserRepository.getUserByEmail(email)
         if (!user) {
-           return { error: "User not found" }
+            return { error: "User not found" }
         }
         if (!user.emailVerified) {
-           return { error: "Email not verified" }
+            return { error: "Email not verified" }
         }
-    },
+    }
 
-    async addGenderAndCompleteProfile(gender: "male" | "female") {
+    static async addGenderAndCompleteProfile(gender: "male" | "female") {
         const headersValue = await headers()
         const session = await auth.api.getSession({ headers: headersValue })
 
-        if (!session?.user ) {
+        if (!session?.user) {
             return { error: "User not found" }
         }
 

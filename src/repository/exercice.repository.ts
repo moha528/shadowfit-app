@@ -1,10 +1,9 @@
-// lib/repositories/Exercise.repository.ts
 import prisma from "@/lib/prisma"
-import {Exercise, Gender, MuscleGroup} from "@prisma/client";
+import { Exercise, Gender, MuscleGroup } from "@prisma/client";
 
-export const ExerciseRepository = {
+export class ExerciseRepository {
 
-    async createExercise(data: {
+    static async createExercise(data: {
         intensity: number;
         muscleGroups: ("PECTORALS" | "BICEPS" | "TRICEPS" | "ABDOMINALS" | "LEGS" | "BACK" | "SHOULDERS" | "CALVES")[];
         image: string;
@@ -22,34 +21,32 @@ export const ExerciseRepository = {
                 image: data.image,
             },
         })
-    },
+    }
 
-    async updateExercise(id: string, data: Partial<Exercise>) {
+    static async updateExercise(id: string, data: Partial<Exercise>) {
         return await prisma.exercise.update({
             where: { id },
             data,
         })
-    },
+    }
 
-    async deleteExercise(id: string) {
+    static async deleteExercise(id: string) {
         return await prisma.exercise.delete({
             where: { id },
         })
-    },
+    }
 
-    async getAllExercises() {
+    static async getAllExercises() {
         return await prisma.exercise.findMany()
-    },
+    }
 
-    async getExerciseById(id: string) {
+    static async getExerciseById(id: string) {
         return await prisma.exercise.findUnique({
             where: { id },
         })
-    },
+    }
 
-
-
-    async getExercisesByType(type: Gender) {
+    static async getExercisesByType(type: Gender) {
         const typesToInclude: Gender[] = [Gender.BOTH]
 
         if (type === Gender.MALE) {
@@ -65,9 +62,9 @@ export const ExerciseRepository = {
                 },
             },
         })
-    },
+    }
 
-    async getExercisesByMuscleGroup(muscleGroup: MuscleGroup[]) {
+    static async getExercisesByMuscleGroup(muscleGroup: MuscleGroup[]) {
         return prisma.exercise.findMany({
             where: {
                 muscleGroups: {
@@ -75,12 +72,12 @@ export const ExerciseRepository = {
                 },
             },
         });
-    },
+    }
 
-    async getExercisesByIntensity(intensity: number) {
+    static async getExercisesByIntensity(intensity: number) {
         return await prisma.exercise.findMany({
             where: { intensity },
         })
-    },
+    }
 
 }
