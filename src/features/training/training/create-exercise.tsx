@@ -8,7 +8,7 @@ import {createExercisesAction} from "@/actions/training.action";
 import {useEdgeStore} from "@/lib/edgestore";
 import {toast} from "sonner";
 import {Progress} from "@/components/ui/progress";
-import {exerciseFields} from "@/features/training/field-schema-form";
+import {exerciseFields} from "@/fields/exercise-fields";
 import { ExerciseFormValues, exerciseSchema } from "@/schemas/training.schema"
 
 export default function ExerciseFormPage() {
