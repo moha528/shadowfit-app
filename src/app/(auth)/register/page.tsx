@@ -108,7 +108,8 @@ export default function RegisterPage() {
         verifyEmail(email)
       },
       onError: (ctx) => {
-        if (ctx.error.message === "Email already exists") {
+        toast.dismiss(loadingToastId);
+
           toastAlert.error({
             title: "Registration error",
             description: "This email is already in use.",
@@ -119,7 +120,7 @@ export default function RegisterPage() {
           //   type: "manual",
           //   message: ctx.error.message,
           // })
-        }
+
       },
     });
     setIsLoading(false)
