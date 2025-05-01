@@ -42,6 +42,7 @@ export default function LoginPage() {
 
 
 
+
   const verifyEmail = async (email: string ) => {
     const {  error } = await authClient.emailOtp.sendVerificationOtp({
       email: email,
@@ -63,6 +64,7 @@ export default function LoginPage() {
     });
     const result = await verifyEmailAction(email)
     if (result.error) {
+      toast.dismiss(loadingToastId)
       toastAlert.error({
         title: "Verification error",
         description: "An error occurred while verifying your email address.",
@@ -86,12 +88,12 @@ export default function LoginPage() {
         // Supprimer le toast de chargement à la réussite
         toast.dismiss(loadingToastId);
 
-          toastAlert.success({
-            title: "Login successful",
-            description: "You are now logged into your account.",
-            duration: 4000,
-          });
-          redirect("/dashboard");
+        toastAlert.success({
+          title: "Login successful",
+          description: "You are now logged into your account.",
+          duration: 4000,
+        });
+        redirect("/dashboard");
 
       },
       onError: (ctx) => {
@@ -117,7 +119,6 @@ export default function LoginPage() {
 
     setIsLoading(false);
   }
-
   return (
       <div className="login-container flex min-h-screen bg-black overflow-hidden">
         {/* Partie image (côté droit) */}

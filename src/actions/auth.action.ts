@@ -18,15 +18,13 @@ export async function verifiedEmailAction(email: string) {
 
 export async function verifyEmailAction(email: string) {
     try {
-        await AuthService.verifyEmail(email)
-        return { success: true }
-    } catch  {
-        return {
-
-            error :" this email is not verified. Please check your inbox and verify your email address."
-        }
+        const result = await AuthService.verifyEmail(email)
+        return result || { error: "Erreur inconnue" }
+    } catch {
+        return { error: "Échec de la vérification de l'email" }
     }
 }
+
 
 export async function completeProfileAction(gender:"male"|"female"){
     try {

@@ -18,15 +18,14 @@ export class AuthService {
     }
 
     static async verifyEmail(email: string) {
-
-
         const user = await UserRepository.getUserByEmail(email)
         if (!user) {
-            return { error: "User not found" }
+            return { error: "Utilisateur non trouvé" }
         }
         if (!user.emailVerified) {
-            return { error: "Email not verified" }
+            return { error: "Email non vérifié" }
         }
+        return { success: true }
     }
 
     static async addGenderAndCompleteProfile(gender: "male" | "female") {
